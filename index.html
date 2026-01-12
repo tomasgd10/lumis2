@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMIS - Enter The Lumisverse | Blockchain Education Through Mythology</title>
+    <meta name="description" content="Where blockchain meets myth. Journey through the Lumisverse and become a Luminari guide in the cosmic Web3 universe.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Overlays -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Corner Crosshairs -->
+    <div class="crosshair crosshair-tl"></div>
+    <div class="crosshair crosshair-tr"></div>
+    <div class="crosshair crosshair-bl"></div>
+    <div class="crosshair crosshair-br"></div>
+
+    <!-- Fixed Logo -->
+    <div class="logo">
+        <span class="logo-text">LUMIS</span>
+    </div>
+
+    <!-- Enter Button -->
+    <a href="#journey" class="enter-button">
+        <span>ENTER THE LUMISVERSE</span>
+    </a>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav">
+        <a href="#hero" class="sidebar-link active" data-section="hero">HOME</a>
+        <a href="#journey" class="sidebar-link" data-section="journey">JOURNEY</a>
+        <a href="#realms" class="sidebar-link" data-section="realms">REALMS</a>
+        <a href="#shadows" class="sidebar-link" data-section="shadows">SHADOWS</a>
+        <a href="#lumi" class="sidebar-link" data-section="lumi">LUMI AI</a>
+    </nav>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-indicator-thumb"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="scroll-container">
+
+        <!-- Hero Section -->
+        <section id="hero" class="section hero-section section-frame">
+            <!-- Background Video -->
+            <div class="hero-video-container">
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="hero-video.mp4" type="video/mp4">
+                </video>
+                <div class="hero-video-fade-top"></div>
+                <div class="hero-video-fade-bottom"></div>
+                <div class="hero-video-fade-left"></div>
+                <div class="hero-video-fade-right"></div>
+            </div>
+
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <!-- Background Symbol -->
+            <div class="hero-symbol flicker">
+                <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" style="color: var(--cyber-cyan);">
+                    <circle cx="100" cy="100" r="90" opacity="0.5" />
+                    <circle cx="100" cy="70" r="40" opacity="0.6" />
+                    <circle cx="70" cy="120" r="30" opacity="0.6" />
+                    <circle cx="130" cy="120" r="30" opacity="0.6" />
+                    <circle cx="100" cy="100" r="60" opacity="0.3" />
+                    <!-- Lumis Star -->
+                    <path d="M100 30 L105 90 L160 100 L105 110 L100 170 L95 110 L40 100 L95 90 Z" opacity="0.4" />
+                </svg>
+            </div>
+
+            <!-- Terminal Log - Top Right -->
+            <div class="terminal-log hide-mobile">
+                <p class="blue-text">$ sudo lumisverse.exe --init-cosmic-protocol</p>
+                <p>Reality weave initiated... <span class="orange-text">STATUS:</span> Active</p>
+                <p class="blue-text">$ query:</p>
+                <p>Seekers detected: <span class="blue-text">∞</span> | Realms online: <span class="orange-text">3</span></p>
+                <p class="orange-text">awaiting:</p>
+                <p>New Luminari candidate... <span class="blue-text">YOU</span></p>
+            </div>
+
+            <!-- Corner Markers -->
+            <div class="corner-marker top-left"></div>
+            <div class="corner-marker top-right"></div>
+            <div class="corner-marker bottom-left"></div>
+            <div class="corner-marker bottom-right"></div>
+
+            <div class="hero-content">
+                <h1 class="hero-title-main">
+                    <span class="hero-letter" style="animation-delay: 0.1s;">L</span><span class="hero-letter" style="animation-delay: 0.2s;">U</span><span class="hero-letter" style="animation-delay: 0.3s;">M</span><span class="hero-letter" style="animation-delay: 0.4s;">I</span><span class="hero-letter" style="animation-delay: 0.5s;">S</span>
+                </h1>
+                <div class="hero-tagline">
+                    <span class="tagline-line"></span>
+                    <span class="tagline-text">ILLUMINATE YOUR PATH</span>
+                    <span class="tagline-line"></span>
+                </div>
+
+                <p class="hero-description">
+                    Journey through the <span class="blue-text">Lumisverse</span> – a cosmic universe where
+                    <span class="orange-text">Seekers</span> become <span class="orange-text">Luminari</span>,
+                    blockchain realms pulse with ancient power, and learning transforms into epic adventure.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value blue-text">∞</div>
+                        <div class="stat-label">Realms to Explore</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value orange-text">5</div>
+                        <div class="stat-label">Arcs of Wisdom</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value blue-text">1</div>
+                        <div class="stat-label">Cosmic Guide</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button" onclick="scrollToSection('journey')" style="position: absolute; bottom: 40px;">
+                <div class="scroll-button-icon">↓</div>
+                <div class="scroll-button-text">Begin Journey</div>
+            </div>
+        </section>
+
+        <!-- Journey Section -->
+        <section id="journey" class="section journey-section section-frame">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <!-- Corner Markers -->
+            <div class="corner-marker top-left"></div>
+            <div class="corner-marker top-right"></div>
+            <div class="corner-marker bottom-left"></div>
+            <div class="corner-marker bottom-right"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    THE <span class="orange-text">SEEKER'S</span> PATH
+                </h2>
+                <p class="section-subtitle terminal-text">Five arcs. Infinite wisdom. Your transformation awaits.</p>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label terminal-text">COMPLETION STATUS</div>
+                <div class="progress-bar-outer">
+                    <div class="progress-bar-inner" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText">0 / 5 ARCS COMPLETED</div>
+            </div>
+
+            <div class="journey-arcs">
+                <!-- Arc 1: Awakening -->
+                <div class="journey-arc" data-arc="1">
+                    <div class="arc-header" onclick="toggleArc(1)">
+                        <div class="arc-number">01</div>
+                        <div class="arc-info">
+                            <h3 class="arc-title">AWAKENING</h3>
+                            <p class="arc-subtitle">Understanding why blockchain matters</p>
+                        </div>
+                        <div class="arc-status" id="status-1">
+                            <span class="status-icon">◆</span>
+                            <span class="status-text">LOCKED</span>
+                        </div>
+                    </div>
+
+                    <div class="arc-content" id="content-1">
+                        <div class="arc-lessons">
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>The Chains are Calling:</strong> In a world of dark data and walled gardens,
+                                    <span class="blue-text">blockchain</span> brings light. Discover why decentralization
+                                    matters and how <span class="orange-text">self-custody</span> returns power to individuals.
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>The Web3 Vision:</strong> From centralized gatekeepers to community-owned networks.
+                                    Learn how blockchain enables <span class="blue-text">trustless cooperation</span> and
+                                    <span class="orange-text">transparent systems</span>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-container">
+                            <h4 class="quiz-title">⚔ TRIAL OF AWAKENING</h4>
+                            <p class="quiz-question">What is the core promise of blockchain technology?</p>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="selectQuizOption(1, 0)">
+                                    <span class="option-letter">A</span>
+                                    <span class="option-text">Faster transactions than credit cards</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(1, 1)">
+                                    <span class="option-letter">B</span>
+                                    <span class="option-text">Decentralization and trustless verification</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(1, 2)">
+                                    <span class="option-letter">C</span>
+                                    <span class="option-text">Making cryptocurrencies more valuable</span>
+                                </div>
+                            </div>
+                            <button class="quiz-submit" onclick="submitQuiz(1, 1)">SUBMIT ANSWER</button>
+                            <div class="quiz-feedback" id="feedback-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arc 2: First Steps -->
+                <div class="journey-arc locked" data-arc="2">
+                    <div class="arc-header" onclick="toggleArc(2)">
+                        <div class="arc-number">02</div>
+                        <div class="arc-info">
+                            <h3 class="arc-title">FIRST STEPS</h3>
+                            <p class="arc-subtitle">Wallets, keys, and self-custody</p>
+                        </div>
+                        <div class="arc-status" id="status-2">
+                            <span class="status-icon">🔒</span>
+                            <span class="status-text">LOCKED</span>
+                        </div>
+                    </div>
+
+                    <div class="arc-content" id="content-2">
+                        <div class="arc-lessons">
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>Your First Wallet:</strong> A wallet is your gateway to the Lumisverse.
+                                    Learn about <span class="blue-text">seed phrases</span>, <span class="orange-text">private keys</span>,
+                                    and why "not your keys, not your coins" is sacred law.
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>Self-Custody Mastery:</strong> Understand the difference between
+                                    <span class="blue-text">custodial</span> and <span class="orange-text">non-custodial</span> wallets.
+                                    Learn best practices for keeping your assets safe.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-container">
+                            <h4 class="quiz-title">⚔ TRIAL OF FIRST STEPS</h4>
+                            <p class="quiz-question">What should you NEVER share with anyone?</p>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="selectQuizOption(2, 0)">
+                                    <span class="option-letter">A</span>
+                                    <span class="option-text">Your wallet address</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(2, 1)">
+                                    <span class="option-letter">B</span>
+                                    <span class="option-text">Your seed phrase / private key</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(2, 2)">
+                                    <span class="option-letter">C</span>
+                                    <span class="option-text">Your transaction history</span>
+                                </div>
+                            </div>
+                            <button class="quiz-submit" onclick="submitQuiz(2, 1)">SUBMIT ANSWER</button>
+                            <div class="quiz-feedback" id="feedback-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arc 3: Realm Walking -->
+                <div class="journey-arc locked" data-arc="3">
+                    <div class="arc-header" onclick="toggleArc(3)">
+                        <div class="arc-number">03</div>
+                        <div class="arc-info">
+                            <h3 class="arc-title">REALM WALKING</h3>
+                            <p class="arc-subtitle">Exploring different blockchains</p>
+                        </div>
+                        <div class="arc-status" id="status-3">
+                            <span class="status-icon">🔒</span>
+                            <span class="status-text">LOCKED</span>
+                        </div>
+                    </div>
+
+                    <div class="arc-content" id="content-3">
+                        <div class="arc-lessons">
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>The Known Realms:</strong> <span class="blue-text">Origin Citadel</span> (Bitcoin),
+                                    <span class="orange-text">The Foundry</span> (Ethereum), <span class="blue-text">Tronara</span> (Tron).
+                                    Each realm has unique powers, cultures, and purposes.
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>Cross-Realm Navigation:</strong> Learn about <span class="blue-text">bridges</span>,
+                                    <span class="orange-text">gas fees</span>, and how to move between realms safely.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-container">
+                            <h4 class="quiz-title">⚔ TRIAL OF REALM WALKING</h4>
+                            <p class="quiz-question">What is the primary purpose of Origin Citadel (Bitcoin)?</p>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="selectQuizOption(3, 0)">
+                                    <span class="option-letter">A</span>
+                                    <span class="option-text">Running complex smart contracts</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(3, 1)">
+                                    <span class="option-letter">B</span>
+                                    <span class="option-text">Secure, immutable store of value</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(3, 2)">
+                                    <span class="option-letter">C</span>
+                                    <span class="option-text">High-speed entertainment transactions</span>
+                                </div>
+                            </div>
+                            <button class="quiz-submit" onclick="submitQuiz(3, 1)">SUBMIT ANSWER</button>
+                            <div class="quiz-feedback" id="feedback-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arc 4: Shadow War -->
+                <div class="journey-arc locked" data-arc="4">
+                    <div class="arc-header" onclick="toggleArc(4)">
+                        <div class="arc-number">04</div>
+                        <div class="arc-info">
+                            <h3 class="arc-title">SHADOW WAR</h3>
+                            <p class="arc-subtitle">Security and threat awareness</p>
+                        </div>
+                        <div class="arc-status" id="status-4">
+                            <span class="status-icon">🔒</span>
+                            <span class="status-text">LOCKED</span>
+                        </div>
+                    </div>
+
+                    <div class="arc-content" id="content-4">
+                        <div class="arc-lessons">
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>The Shadow Syndicate:</strong> Meet <span class="blue-text">Rugrath</span> (rug pulls),
+                                    <span class="orange-text">Phishara</span> (phishing), and <span class="blue-text">Centralis</span> (centralization).
+                                    Learn to identify and defend against each villain.
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>Defender's Wisdom:</strong> Recognize fake websites, suspicious DMs,
+                                    too-good-to-be-true promises. Practice <span class="blue-text">signature verification</span>
+                                    and <span class="orange-text">contract auditing</span>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-container">
+                            <h4 class="quiz-title">⚔ TRIAL OF SHADOW WAR</h4>
+                            <p class="quiz-question">Which villain represents phishing attacks?</p>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="selectQuizOption(4, 0)">
+                                    <span class="option-letter">A</span>
+                                    <span class="option-text">Rugrath</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(4, 1)">
+                                    <span class="option-letter">B</span>
+                                    <span class="option-text">Phishara</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(4, 2)">
+                                    <span class="option-letter">C</span>
+                                    <span class="option-text">Centralis</span>
+                                </div>
+                            </div>
+                            <button class="quiz-submit" onclick="submitQuiz(4, 1)">SUBMIT ANSWER</button>
+                            <div class="quiz-feedback" id="feedback-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arc 5: Becoming Luminari -->
+                <div class="journey-arc locked" data-arc="5">
+                    <div class="arc-header" onclick="toggleArc(5)">
+                        <div class="arc-number">05</div>
+                        <div class="arc-info">
+                            <h3 class="arc-title">BECOMING LUMINARI</h3>
+                            <p class="arc-subtitle">Governance, staking, and teaching</p>
+                        </div>
+                        <div class="arc-status" id="status-5">
+                            <span class="status-icon">🔒</span>
+                            <span class="status-text">LOCKED</span>
+                        </div>
+                    </div>
+
+                    <div class="arc-content" id="content-5">
+                        <div class="arc-lessons">
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>Realm Governance:</strong> Learn about <span class="blue-text">DAOs</span>,
+                                    voting mechanisms, and how to shape the future of your chosen realms through
+                                    <span class="orange-text">governance participation</span>.
+                                </div>
+                            </div>
+                            <div class="lesson-item">
+                                <div class="lesson-icon">▸</div>
+                                <div class="lesson-text">
+                                    <strong>The Light Multiplies:</strong> Understanding <span class="blue-text">staking</span>,
+                                    <span class="orange-text">delegation</span>, and most importantly – how to guide
+                                    new Seekers on their own journeys. The cycle continues.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-container">
+                            <h4 class="quiz-title">⚔ FINAL TRIAL OF LUMINARI</h4>
+                            <p class="quiz-question">What does it mean to become a Luminari?</p>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="selectQuizOption(5, 0)">
+                                    <span class="option-letter">A</span>
+                                    <span class="option-text">Accumulating maximum tokens</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(5, 1)">
+                                    <span class="option-letter">B</span>
+                                    <span class="option-text">Understanding, participating, and guiding others</span>
+                                </div>
+                                <div class="quiz-option" onclick="selectQuizOption(5, 2)">
+                                    <span class="option-letter">C</span>
+                                    <span class="option-text">Trading cryptocurrencies daily</span>
+                                </div>
+                            </div>
+                            <button class="quiz-submit" onclick="submitQuiz(5, 1)">SUBMIT ANSWER</button>
+                            <div class="quiz-feedback" id="feedback-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button" onclick="scrollToSection('realms')" style="position: absolute; bottom: 40px;">
+                <div class="scroll-button-icon">↓</div>
+                <div class="scroll-button-text">Explore Realms</div>
+            </div>
+        </section>
+
+        <!-- Realms Section -->
+        <section id="realms" class="section realms-section section-frame">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <!-- Corner Markers -->
+            <div class="corner-marker top-left"></div>
+            <div class="corner-marker top-right"></div>
+            <div class="corner-marker bottom-left"></div>
+            <div class="corner-marker bottom-right"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    KNOWN <span class="blue-text">REALMS</span>
+                </h2>
+                <p class="section-subtitle terminal-text">Each blockchain is a living world with its own power and purpose</p>
+            </div>
+
+            <div class="realms-grid">
+                <div class="realm-card">
+                    <div class="realm-icon blue-text">◈</div>
+                    <h3 class="realm-name">ORIGIN CITADEL</h3>
+                    <div class="realm-blockchain terminal-text">BITCOIN</div>
+                    <p class="realm-description">
+                        The First Realm. Where it all began. Immutable security,
+                        absolute trust, the foundation of the entire Lumisverse.
+                    </p>
+                    <div class="realm-values">
+                        <span class="realm-tag">Security</span>
+                        <span class="realm-tag">Immutability</span>
+                        <span class="realm-tag">Trust</span>
+                    </div>
+                </div>
+
+                <div class="realm-card">
+                    <div class="realm-icon orange-text">◆</div>
+                    <h3 class="realm-name">THE FOUNDRY</h3>
+                    <div class="realm-blockchain terminal-text">ETHEREUM</div>
+                    <p class="realm-description">
+                        The Realm of Creation. Where smart contracts breathe life
+                        into code and decentralized applications reshape reality.
+                    </p>
+                    <div class="realm-values">
+                        <span class="realm-tag">Innovation</span>
+                        <span class="realm-tag">Smart Contracts</span>
+                        <span class="realm-tag">DeFi</span>
+                    </div>
+                </div>
+
+                <div class="realm-card">
+                    <div class="realm-icon blue-text">◎</div>
+                    <h3 class="realm-name">TRONARA</h3>
+                    <div class="realm-blockchain terminal-text">TRON</div>
+                    <p class="realm-description">
+                        The Realm of Eternal Motion. High-speed transactions,
+                        entertainment empires, and boundless accessibility for all.
+                    </p>
+                    <div class="realm-values">
+                        <span class="realm-tag">Speed</span>
+                        <span class="realm-tag">Entertainment</span>
+                        <span class="realm-tag">Abundance</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="realm-cta">
+                <p class="terminal-text">MORE REALMS AWAIT DISCOVERY...</p>
+                <p class="realm-cta-text">
+                    Protocols can join the Lumisverse. Become a realm. Shape the mythology.
+                </p>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button" onclick="scrollToSection('shadows')" style="position: absolute; bottom: 40px;">
+                <div class="scroll-button-icon">↓</div>
+                <div class="scroll-button-text">Face the Shadows</div>
+            </div>
+        </section>
+
+        <!-- Shadow Syndicate Section -->
+        <section id="shadows" class="section shadows-section section-frame">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <!-- Corner Markers -->
+            <div class="corner-marker top-left"></div>
+            <div class="corner-marker top-right"></div>
+            <div class="corner-marker bottom-left"></div>
+            <div class="corner-marker bottom-right"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    THE <span class="orange-text">SHADOW SYNDICATE</span>
+                </h2>
+                <p class="section-subtitle terminal-text">Know your enemy. Defend the light.</p>
+            </div>
+
+            <div class="villains-grid">
+                <div class="villain-card">
+                    <div class="villain-icon">☠</div>
+                    <h3 class="villain-name orange-text">RUGRATH</h3>
+                    <p class="villain-description">
+                        Master of false promises and exit scams. Rugrath creates illusions
+                        of prosperity, only to vanish with your trust—and your tokens.
+                    </p>
+                    <div class="villain-threat">
+                        <div class="threat-label terminal-text">THREAT TYPE:</div>
+                        <div class="threat-value">Rug Pulls • Exit Scams • Fake Projects</div>
+                    </div>
+                </div>
+
+                <div class="villain-card">
+                    <div class="villain-icon">⚠</div>
+                    <h3 class="villain-name blue-text">PHISHARA</h3>
+                    <p class="villain-description">
+                        The Deceiver. Mistress of social engineering and fake websites.
+                        Phishara mirrors trust to steal your most precious secrets.
+                    </p>
+                    <div class="villain-threat">
+                        <div class="threat-label terminal-text">THREAT TYPE:</div>
+                        <div class="threat-value">Phishing • Social Engineering • Impersonation</div>
+                    </div>
+                </div>
+
+                <div class="villain-card">
+                    <div class="villain-icon">⛓</div>
+                    <h3 class="villain-name orange-text">CENTRALIS</h3>
+                    <p class="villain-description">
+                        The Controller. He who consolidates power into single points
+                        of failure. Centralis corrupts the very promise of decentralization.
+                    </p>
+                    <div class="villain-threat">
+                        <div class="threat-label terminal-text">THREAT TYPE:</div>
+                        <div class="threat-value">Centralization • Control • Single Points of Failure</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-cta">
+                <h3 class="game-cta-title">SHADOW SYNDICATE DEFENDER</h3>
+                <p class="game-cta-text">Test your knowledge. Battle the villains. Prove your worth.</p>
+                <a href="game.html" class="btn-cyber">ENTER THE ARENA</a>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button" onclick="scrollToSection('lumi')" style="position: absolute; bottom: 40px;">
+                <div class="scroll-button-icon">↓</div>
+                <div class="scroll-button-text">Meet Lumi</div>
+            </div>
+        </section>
+
+        <!-- Lumi AI Section -->
+        <section id="lumi" class="section lumi-section section-frame">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <!-- Corner Markers -->
+            <div class="corner-marker top-left"></div>
+            <div class="corner-marker top-right"></div>
+            <div class="corner-marker bottom-left"></div>
+            <div class="corner-marker bottom-right"></div>
+
+            <!-- Scrolling Avatar Columns -->
+            <div class="avatar-columns hide-mobile" style="position: absolute; left: 40px; top: 50%; transform: translateY(-50%);">
+                <div class="avatar-column scroll-up">
+                    <div class="avatar-item"><div class="avatar-placeholder">✧</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◈</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◆</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◎</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">⬡</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">✧</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◈</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◆</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◎</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">⬡</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">✧</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◈</div></div>
+                </div>
+                <div class="avatar-column scroll-down">
+                    <div class="avatar-item"><div class="avatar-placeholder">◆</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">✧</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◎</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">⬡</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◈</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◆</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">✧</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◎</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">⬡</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◈</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◆</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">✧</div></div>
+                </div>
+                <div class="avatar-column scroll-up">
+                    <div class="avatar-item"><div class="avatar-placeholder">⬡</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◎</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">✧</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◈</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◆</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">⬡</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◎</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">✧</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◈</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◆</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">⬡</div></div>
+                    <div class="avatar-item"><div class="avatar-placeholder">◎</div></div>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    MEET <span class="blue-text">LUMI</span>
+                </h2>
+                <p class="section-subtitle terminal-text">Your mystical guide through the Lumisverse</p>
+            </div>
+
+            <div class="lumi-content">
+                <div class="lumi-icon flicker">✧</div>
+                <div class="lumi-description">
+                    <p>
+                        Lumi is more than an AI—she is the <span class="blue-text">Voice of the Lumisverse</span>,
+                        a warm and wise companion who translates blockchain complexity into
+                        <span class="orange-text">cosmic mythology</span>.
+                    </p>
+                    <p>
+                        Ask her anything. She speaks in tales of realms and heroes, villains and victories.
+                        She remembers your journey. She guides with patience and wonder.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lumi-features">
+                <div class="lumi-feature">
+                    <div class="feature-icon blue-text">◉</div>
+                    <div class="feature-text">Answers any blockchain question in mythological language</div>
+                </div>
+                <div class="lumi-feature">
+                    <div class="feature-icon orange-text">◉</div>
+                    <div class="feature-text">Maintains conversation context across your entire journey</div>
+                </div>
+                <div class="lumi-feature">
+                    <div class="feature-icon blue-text">◉</div>
+                    <div class="feature-text">Teaches through story while providing real technical knowledge</div>
+                </div>
+                <div class="lumi-feature">
+                    <div class="feature-icon orange-text">◉</div>
+                    <div class="feature-text">Warns about security threats through villain narratives</div>
+                </div>
+            </div>
+
+            <div class="lumi-cta">
+                <a href="lumi-chat.html" class="btn-cyber-filled">SPEAK WITH LUMI</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">LUMIS</div>
+                <div class="footer-tagline terminal-text">
+                    "In a world of dark data and walled gardens, Lumis brings light."
+                </div>
+                <div class="footer-links">
+                    <a href="#hero" class="footer-link">Home</a>
+                    <a href="#journey" class="footer-link">Journey</a>
+                    <a href="#realms" class="footer-link">Realms</a>
+                    <a href="#shadows" class="footer-link">Shadows</a>
+                    <a href="lumi-chat.html" class="footer-link">Lumi AI</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>The Chains are calling. Your journey awaits. Step into the light. ✧</p>
+                    <p class="terminal-text">MIT License • The light belongs to everyone</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

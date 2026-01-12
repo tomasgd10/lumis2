@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(copy \"C:\\\\Users\\\\Laurynas\\\\Downloads\\\\Animated_Hero_Video_Generation.mp4\" \"C:\\\\Users\\\\Laurynas\\\\Desktop\\\\Antigravity\\\\lumis2\\\\hero-video.mp4\")",
+      "Bash(powershell:*)"
+    ]
+  }
+}
