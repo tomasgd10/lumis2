@@ -76,6 +76,26 @@ body {
     background: radial-gradient(ellipse at center, transparent 30%, hsla(202, 60%, 5%, 0.6) 100%);
 }
 
+/* Section Transition Gradients */
+.section-transition {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    z-index: 10;
+    pointer-events: none;
+    margin-top: -30px;
+    margin-bottom: -30px;
+}
+
+.hero-to-journey {
+    background: linear-gradient(
+        to bottom,
+        hsla(202, 60%, 5%, 0.4) 0%,
+        hsla(205, 55%, 7%, 0.2) 50%,
+        hsla(210, 50%, 8%, 0.4) 100%
+    );
+}
+
 /* Corner Crosshairs */
 .crosshair {
     position: fixed;
@@ -420,6 +440,8 @@ body {
     text-align: center;
     margin-bottom: 60px;
     max-width: 900px;
+    position: relative;
+    z-index: 5;
 }
 
 .section-title {
@@ -973,6 +995,74 @@ body {
 
 .journey-section {
     background: linear-gradient(180deg, var(--cyber-dark) 0%, var(--cyber-bg) 50%, var(--cyber-dark) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Journey Background Video */
+.journey-video-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.journey-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Dark overlay on journey video */
+.journey-video-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: hsla(202, 50%, 5%, 0.65);
+    z-index: 2;
+}
+
+.journey-video-fade-top,
+.journey-video-fade-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 25%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.journey-video-fade-top {
+    top: 0;
+    background: linear-gradient(to bottom, var(--cyber-dark) 0%, transparent 100%);
+}
+
+.journey-video-fade-bottom {
+    bottom: 0;
+    background: linear-gradient(to top, var(--cyber-dark) 0%, transparent 100%);
+}
+
+.journey-video-fade-left,
+.journey-video-fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.journey-video-fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--cyber-dark) 0%, transparent 100%);
+}
+
+.journey-video-fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--cyber-dark) 0%, transparent 100%);
 }
 
 /* Progress Bar */
@@ -981,6 +1071,8 @@ body {
     max-width: 900px;
     margin-bottom: 60px;
     text-align: center;
+    position: relative;
+    z-index: 5;
 }
 
 .progress-label {
@@ -1017,14 +1109,17 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    position: relative;
+    z-index: 5;
 }
 
 .journey-arc {
-    background: hsla(202, 50%, 10%, 0.6);
+    background: hsla(202, 50%, 8%, 0.85);
     border: 1px solid hsla(180, 50%, 20%, 0.3);
     border-radius: 4px;
     overflow: hidden;
     transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
 }
 
 .journey-arc:hover {
@@ -1390,6 +1485,90 @@ body {
     border-color: var(--cyber-orange);
     box-shadow: var(--shadow-orange);
     transform: translateY(-5px);
+}
+
+.villain-phishara {
+    background:
+        linear-gradient(to bottom, hsla(202, 50%, 5%, 0.6), hsla(202, 50%, 5%, 0.75)),
+        url('phishara.png') center 20% / 152% no-repeat;
+    position: relative;
+    padding: 40px 30px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+}
+
+.villain-phishara .villain-name {
+    font-size: 1.7rem;
+    margin-bottom: 25px;
+    text-shadow: 0 0 20px hsla(180, 100%, 43%, 0.5);
+}
+
+.villain-phishara .villain-description {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.villain-phishara .villain-threat {
+    margin-top: auto;
+}
+
+.villain-centralis {
+    background:
+        linear-gradient(to bottom, hsla(202, 50%, 5%, 0.6), hsla(202, 50%, 5%, 0.75)),
+        url('centralis.png') center 20% / 152% no-repeat;
+    position: relative;
+    padding: 40px 30px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+}
+
+.villain-centralis .villain-name {
+    font-size: 1.7rem;
+    margin-bottom: 25px;
+    text-shadow: 0 0 20px hsla(18, 100%, 60%, 0.5);
+}
+
+.villain-centralis .villain-description {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.villain-centralis .villain-threat {
+    margin-top: auto;
+}
+
+.villain-rugrath {
+    background:
+        linear-gradient(to bottom, hsla(202, 50%, 5%, 0.6), hsla(202, 50%, 5%, 0.75)),
+        url('rugrath.png') center 20% / 152% no-repeat;
+    position: relative;
+    padding: 40px 30px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+}
+
+.villain-rugrath .villain-name {
+    font-size: 1.7rem;
+    margin-bottom: 25px;
+    text-shadow: 0 0 20px hsla(18, 100%, 60%, 0.5);
+}
+
+.villain-rugrath .villain-description {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.villain-rugrath .villain-threat {
+    margin-top: auto;
 }
 
 .villain-icon {
