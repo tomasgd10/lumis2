@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Syndicate Defender | Lumis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyber-bg: hsl(202, 50%, 8%);
+            --cyber-dark: hsl(202, 60%, 5%);
+            --cyber-cyan: hsl(180, 100%, 43%);
+            --cyber-orange: hsl(18, 100%, 60%);
+            --foreground: hsl(0, 0%, 100%);
+            --muted: hsl(202, 30%, 20%);
+            --muted-foreground: hsl(200, 10%, 60%);
+            --border: hsl(180, 50%, 20%);
+            --color-green: #22c55e;
+            --color-red: #ef4444;
+            --glow-cyan: 0 0 30px hsla(180, 100%, 43%, 0.5), 0 0 60px hsla(180, 100%, 43%, 0.3);
+            --glow-orange: 0 0 30px hsla(18, 100%, 60%, 0.5);
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: var(--cyber-bg);
+            color: var(--foreground);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Scanlines */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                hsla(0, 0%, 0%, 0.03) 2px,
+                hsla(0, 0%, 0%, 0.03) 4px
+            );
+        }
+
+        /* Vignette */
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            background: radial-gradient(ellipse at center, transparent 40%, hsla(202, 60%, 5%, 0.8) 100%);
+        }
+
+        /* Grid */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background-image:
+                linear-gradient(hsla(180, 100%, 43%, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, hsla(180, 100%, 43%, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        #game-container {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: hsla(202, 50%, 5%, 0.9);
+            border-bottom: 1px solid var(--border);
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.3rem;
+            color: var(--foreground);
+            text-decoration: none;
+            text-shadow: 0 0 20px var(--cyber-cyan);
+        }
+
+        .stats {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--cyber-cyan);
+            text-shadow: 0 0 10px var(--cyber-cyan);
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            color: var(--muted-foreground);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Health bar */
+        .health-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .health-bar {
+            width: 180px;
+            height: 10px;
+            background: var(--muted);
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyber-cyan), var(--cyber-orange));
+            transition: width 0.3s ease;
+            box-shadow: var(--glow-cyan);
+        }
+
+        /* Main game area */
+        .game-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Title Screen */
+        #title-screen {
+            text-align: center;
+            max-width: 700px;
+        }
+
+        #title-screen h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            background: linear-gradient(180deg, #ffffff 0%, var(--cyber-cyan) 50%, var(--cyber-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px hsla(180, 100%, 50%, 0.5));
+        }
+
+        #title-screen .subtitle {
+            font-size: 1rem;
+            color: var(--cyber-orange);
+            margin-bottom: 2rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        #title-screen .description {
+            color: var(--muted-foreground);
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 1rem 3rem;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--cyber-cyan);
+            color: var(--cyber-dark);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .btn-primary:hover {
+            background: var(--cyber-orange);
+            box-shadow: var(--glow-orange);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--cyber-cyan);
+            border: 2px solid var(--cyber-cyan);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--cyber-cyan);
+            color: var(--cyber-dark);
+        }
+
+        /* Challenge Card */
+        #challenge-screen {
+            width: 100%;
+            max-width: 750px;
+            display: none;
+        }
+
+        .villain-intro {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .villain-icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            animation: float 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px var(--cyber-orange));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .villain-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cyber-orange);
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 10px var(--cyber-orange);
+        }
+
+        .challenge-card {
+            background: hsla(202, 50%, 10%, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-type {
+            font-size: 0.7rem;
+            color: var(--cyber-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-scenario {
+            background: hsla(202, 60%, 5%, 0.8);
+            border-left: 3px solid var(--cyber-orange);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: hsla(180, 100%, 43%, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--foreground);
+            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: hsla(180, 100%, 43%, 0.15);
+            border-color: var(--cyber-cyan);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px hsla(180, 100%, 43%, 0.3);
+        }
+
+        .option-btn.correct {
+            background: hsla(120, 100%, 40%, 0.2);
+            border-color: var(--color-green);
+            box-shadow: 0 0 20px hsla(120, 100%, 40%, 0.4);
+        }
+
+        .option-btn.wrong {
+            background: hsla(0, 100%, 50%, 0.2);
+            border-color: var(--color-red);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Timer */
+        .timer-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--muted);
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .timer-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-green), var(--cyber-cyan), var(--cyber-orange), var(--color-red));
+            transition: width 0.1s linear;
+        }
+
+        /* Wave indicator */
+        .wave-indicator {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* Lumi */
+        .lumi-helper {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .lumi-avatar {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--cyber-cyan), hsl(180, 100%, 35%));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--glow-cyan);
+            animation: lumi-glow 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes lumi-glow {
+            0%, 100% { box-shadow: 0 0 20px hsla(180, 100%, 43%, 0.4); }
+            50% { box-shadow: 0 0 40px hsla(180, 100%, 43%, 0.7); }
+        }
+
+        .lumi-bubble {
+            background: hsla(202, 50%, 10%, 0.95);
+            border: 1px solid var(--cyber-cyan);
+            padding: 1rem 1.5rem;
+            border-radius: 8px 8px 0 8px;
+            max-width: 320px;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            display: none;
+            box-shadow: var(--glow-cyan);
+        }
+
+        .lumi-bubble.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Result Screen */
+        #result-screen {
+            text-align: center;
+            display: none;
+            max-width: 600px;
+        }
+
+        #result-screen h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        #result-screen.victory h2 {
+            background: linear-gradient(180deg, #ffffff, var(--cyber-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px hsla(180, 100%, 50%, 0.5));
+        }
+
+        #result-screen.defeat h2 {
+            color: var(--cyber-orange);
+            text-shadow: 0 0 20px var(--cyber-orange);
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 2.5rem 0;
+        }
+
+        .result-stat {
+            text-align: center;
+        }
+
+        .result-stat-value {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--cyber-cyan);
+            text-shadow: 0 0 15px var(--cyber-cyan);
+        }
+
+        .result-stat-label {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .lesson-learned {
+            background: hsla(202, 50%, 10%, 0.8);
+            border-left: 3px solid var(--cyber-cyan);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .lesson-learned h4 {
+            color: var(--cyber-cyan);
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .lesson-learned p {
+            color: var(--muted-foreground);
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+
+        /* Back link */
+        .back-link {
+            position: fixed;
+            top: 1.5rem;
+            left: 2rem;
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-link:hover {
+            color: var(--cyber-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .stats {
+                gap: 1.5rem;
+            }
+
+            #title-screen h1 {
+                font-size: 2rem;
+            }
+
+            .challenge-card {
+                padding: 1.5rem;
+            }
+
+            .result-stats {
+                gap: 2rem;
+            }
+
+            .result-stat-value {
+                font-size: 2rem;
+            }
+
+            .lumi-helper {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .lumi-bubble {
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="grid-overlay"></div>
+
+    <a href="index.html" class="back-link">&larr; RETURN TO LUMIS</a>
+
+    <div id="game-container">
+        <header class="game-header">
+            <a href="index.html" class="logo">LUMIS</a>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="score">0</div>
+                    <div class="stat-label">Score</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="wave">1</div>
+                    <div class="stat-label">Wave</div>
+                </div>
+                <div class="health-container">
+                    <div class="stat-label">Shield Energy</div>
+                    <div class="health-bar">
+                        <div class="health-fill" id="health-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <!-- Title Screen -->
+            <div id="title-screen">
+                <h1>Shadow Syndicate Defender</h1>
+                <p class="subtitle">Protect Your Wallet From the Darkness</p>
+                <p class="description">
+                    The Shadow Syndicate is attacking! Rugrath, Phishara, and Centralis are sending waves of threats.
+                    Answer correctly to deflect their attacks. One wrong answer damages your shield.
+                    Survive all waves to become a true Guardian of the Lumisverse!
+                </p>
+                <button class="btn btn-primary" onclick="startGame()">Begin Defense</button>
+                <a href="index.html" class="btn btn-secondary">Back to Lumis</a>
+            </div>
+
+            <!-- Challenge Screen -->
+            <div id="challenge-screen">
+                <div class="wave-indicator" id="wave-indicator">Wave 1 of 5</div>
+                <div class="timer-bar">
+                    <div class="timer-fill" id="timer-fill" style="width: 100%"></div>
+                </div>
+                <div class="villain-intro">
+                    <div class="villain-icon" id="villain-icon">👤</div>
+                    <div class="villain-name" id="villain-name">Villain</div>
+                </div>
+                <div class="challenge-card">
+                    <div class="challenge-type" id="challenge-type">Challenge</div>
+                    <div class="challenge-scenario" id="challenge-scenario">Scenario text...</div>
+                    <p class="challenge-text" id="challenge-text">Question text...</p>
+                    <div class="options" id="options"></div>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen">
+                <h2 id="result-title">Result</h2>
+                <p id="result-subtitle" style="color: var(--muted-foreground); margin-bottom: 1rem;"></p>
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="final-score">0</div>
+                        <div class="result-stat-label">Final Score</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="correct-count">0</div>
+                        <div class="result-stat-label">Correct</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="waves-survived">0</div>
+                        <div class="result-stat-label">Waves</div>
+                    </div>
+                </div>
+                <div class="lesson-learned" id="lesson-learned">
+                    <h4>&#10023; Lumi's Wisdom</h4>
+                    <p id="lesson-text">You've learned valuable lessons about protecting yourself in the blockchain world.</p>
+                </div>
+                <button class="btn btn-primary" onclick="restartGame()">Defend Again</button>
+                <a href="index.html" class="btn btn-secondary">Return to Lumis</a>
+            </div>
+        </main>
+
+        <!-- Lumi Helper -->
+        <div class="lumi-helper">
+            <div class="lumi-bubble" id="lumi-bubble">
+                <span id="lumi-text">Welcome, seeker! I'm here to help.</span>
+            </div>
+            <div class="lumi-avatar">&#10023;</div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let score = 0;
+        let health = 100;
+        let wave = 1;
+        let currentChallenge = 0;
+        let correctAnswers = 0;
+        let timer = null;
+        let timeLeft = 100;
+        const maxWaves = 5;
+        const challengesPerWave = 3;
+
+        // Villains
+        const villains = {
+            rugrath: { icon: '🪤', name: 'Rugrath' },
+            phishara: { icon: '🎭', name: 'Phishara' },
+            centralis: { icon: '🏛️', name: 'Centralis' }
+        };
+
+        // Challenges database
+        const challenges = [
+            // Wave 1 - Basics
+            {
+                villain: 'rugrath',
+                type: 'Rug Pull Alert',
+                scenario: 'A new project promises 1000% returns in 24 hours. The team is anonymous and the website was created yesterday.',
+                question: 'What should you do?',
+                options: [
+                    { text: 'Invest quickly before it\'s too late!', correct: false },
+                    { text: 'Ask friends to invest with you', correct: false },
+                    { text: 'Walk away — these are major red flags', correct: true },
+                    { text: 'Invest a small amount to test it', correct: false }
+                ],
+                lesson: 'Anonymous teams, unrealistic returns, and urgency are classic rug pull signs. If it sounds too good to be true, it is.'
+            },
+            {
+                villain: 'phishara',
+                type: 'Phishing Attempt',
+                scenario: 'You receive a DM: "Hi! I\'m from Wallet Support. We noticed suspicious activity. Please click this link and enter your seed phrase to verify your account."',
+                question: 'What\'s the right response?',
+                options: [
+                    { text: 'Click the link — they\'re trying to help', correct: false },
+                    { text: 'Ignore and block — real support never asks for seed phrases', correct: true },
+                    { text: 'Send only part of your seed phrase', correct: false },
+                    { text: 'Ask them for more details first', correct: false }
+                ],
+                lesson: 'NEVER share your seed phrase with anyone. Real support teams will never ask for it. This is always a scam.'
+            },
+            {
+                villain: 'centralis',
+                type: 'Custody Question',
+                scenario: 'An exchange offers to "safely store" your crypto with 5% interest. All you need to do is deposit your assets with them.',
+                question: 'What\'s the key risk here?',
+                options: [
+                    { text: 'The interest rate is too low', correct: false },
+                    { text: 'You give up control — not your keys, not your coins', correct: true },
+                    { text: 'There is no risk, exchanges are always safe', correct: false },
+                    { text: 'The paperwork is too complicated', correct: false }
+                ],
+                lesson: 'When you deposit on an exchange, you don\'t hold your keys. The exchange controls your assets. Use self-custody for long-term storage.'
+            },
+            // Wave 2 - Intermediate
+            {
+                villain: 'phishara',
+                type: 'Fake Website',
+                scenario: 'You want to use Uniswap. You search Google and click the first result. The URL shows: "un1swap.com"',
+                question: 'What should you notice?',
+                options: [
+                    { text: 'Everything looks fine, proceed', correct: false },
+                    { text: 'The URL is fake — it uses "1" instead of "i"', correct: true },
+                    { text: 'Google results are always safe', correct: false },
+                    { text: 'Close the tab and give up', correct: false }
+                ],
+                lesson: 'Always verify URLs carefully. Scammers create lookalike sites with subtle changes. Bookmark official sites and use those links.'
+            },
+            {
+                villain: 'rugrath',
+                type: 'Project Evaluation',
+                scenario: 'A project has: no whitepaper, a copied website design, locked social media comments, and admin-only Telegram.',
+                question: 'How would you rate this project?',
+                options: [
+                    { text: 'Looks professional, invest now', correct: false },
+                    { text: 'Multiple red flags — stay away', correct: true },
+                    { text: 'The locked comments mean it\'s exclusive', correct: false },
+                    { text: 'No whitepaper is fine for new projects', correct: false }
+                ],
+                lesson: 'Legitimate projects welcome questions and provide documentation. Silenced communities and missing information are warning signs.'
+            },
+            {
+                villain: 'centralis',
+                type: 'Exchange Trouble',
+                scenario: 'Breaking news: A major exchange has frozen all withdrawals citing "liquidity issues." Users can\'t access their funds.',
+                question: 'What lesson does this teach?',
+                options: [
+                    { text: 'Exchanges are totally safe', correct: false },
+                    { text: 'Only keep on exchanges what you\'re actively trading', correct: true },
+                    { text: 'This can\'t happen to regulated exchanges', correct: false },
+                    { text: 'Just wait, they\'ll fix it', correct: false }
+                ],
+                lesson: 'Exchange failures happen. Only keep on exchanges what you need for trading. Move long-term holdings to your own wallet.'
+            },
+            // Wave 3 - Security
+            {
+                villain: 'phishara',
+                type: 'Social Engineering',
+                scenario: 'Someone in Discord claims to be a project admin. They DM you saying you won a giveaway and need to "connect your wallet" to claim it.',
+                question: 'What\'s happening here?',
+                options: [
+                    { text: 'I won! Let me connect my wallet', correct: false },
+                    { text: 'This is likely a scam — admins don\'t DM first', correct: true },
+                    { text: 'Ask for proof they\'re really an admin', correct: false },
+                    { text: 'Giveaways are always legitimate', correct: false }
+                ],
+                lesson: 'Real admins rarely DM first. Unsolicited "prizes" are almost always scams. Verify through official channels only.'
+            },
+            {
+                villain: 'rugrath',
+                type: 'FOMO Pressure',
+                scenario: 'A project is having a "flash sale" — 90% discount but only for the next 10 minutes! Everyone in the Telegram is saying they\'re buying.',
+                question: 'How should you react?',
+                options: [
+                    { text: 'Buy fast before time runs out!', correct: false },
+                    { text: 'Extreme urgency is a manipulation tactic — pause and research', correct: true },
+                    { text: 'If everyone is buying, it must be good', correct: false },
+                    { text: 'Ask someone in the chat if it\'s legit', correct: false }
+                ],
+                lesson: 'FOMO (Fear Of Missing Out) is a manipulation tool. Legitimate investments don\'t require instant decisions. Take your time to research.'
+            },
+            {
+                villain: 'centralis',
+                type: 'Convenience vs Security',
+                scenario: 'A service offers to manage your crypto portfolio. They just need your wallet\'s private key to "optimize trades" for you.',
+                question: 'Should you share your private key?',
+                options: [
+                    { text: 'Only if they seem trustworthy', correct: false },
+                    { text: 'Never — sharing private keys gives total control', correct: true },
+                    { text: 'Yes, for better returns', correct: false },
+                    { text: 'Only share with regulated services', correct: false }
+                ],
+                lesson: 'NEVER share your private key. Any service asking for it is a scam. Legitimate services use other authorization methods.'
+            },
+            // Wave 4 - Advanced
+            {
+                villain: 'phishara',
+                type: 'Approval Scam',
+                scenario: 'A dApp asks you to approve "unlimited" token spending. The transaction fee seems normal.',
+                question: 'What\'s the hidden danger?',
+                options: [
+                    { text: 'Nothing, unlimited approval is standard', correct: false },
+                    { text: 'Unlimited approval lets them drain all your tokens later', correct: true },
+                    { text: 'The fee is the only concern', correct: false },
+                    { text: 'Only approve if the dApp looks nice', correct: false }
+                ],
+                lesson: 'Unlimited approvals are dangerous. They allow contracts to take all your tokens at any time. Set spending limits or revoke approvals after use.'
+            },
+            {
+                villain: 'rugrath',
+                type: 'Fake Audit',
+                scenario: 'A project shows a "security audit" badge on their website. When you click it, it goes to a PDF on their own server, not an auditor\'s site.',
+                question: 'What does this suggest?',
+                options: [
+                    { text: 'All audits are the same', correct: false },
+                    { text: 'The audit may be fake — verify on the auditor\'s official site', correct: true },
+                    { text: 'PDFs are more trustworthy than websites', correct: false },
+                    { text: 'If they have a badge, they were audited', correct: false }
+                ],
+                lesson: 'Always verify audits through the auditing company\'s official website. Fake audit badges are common scam tactics.'
+            },
+            {
+                villain: 'centralis',
+                type: 'Regulation Trap',
+                scenario: 'A "licensed and regulated" platform requires you to deposit larger amounts to "unlock premium features" and easier withdrawals.',
+                question: 'What type of scam is this?',
+                options: [
+                    { text: 'Not a scam — they\'re regulated', correct: false },
+                    { text: 'Advance fee scam — they\'ll keep asking for more', correct: true },
+                    { text: 'Normal business practice', correct: false },
+                    { text: 'Pay more to get premium benefits', correct: false }
+                ],
+                lesson: '"Deposit more to withdraw" is a classic scam pattern. Legitimate platforms don\'t lock withdrawals behind additional deposits.'
+            },
+            // Wave 5 - Expert
+            {
+                villain: 'phishara',
+                type: 'Clipboard Hijack',
+                scenario: 'You copy a wallet address to send crypto. Unknown to you, malware on your computer changes the address when you paste it.',
+                question: 'How can you protect yourself?',
+                options: [
+                    { text: 'Trust the paste, it\'s what I copied', correct: false },
+                    { text: 'Always verify the full address before confirming any transaction', correct: true },
+                    { text: 'Only send to contacts in my address book', correct: false },
+                    { text: 'This only happens on old computers', correct: false }
+                ],
+                lesson: 'Always verify the complete address before sending crypto. Clipboard malware can change addresses. Check at least the first and last several characters.'
+            },
+            {
+                villain: 'rugrath',
+                type: 'Honeypot Token',
+                scenario: 'You find a token that\'s pumping. You buy in, but when you try to sell, the transaction fails. The contract only allows the creators to sell.',
+                question: 'What is this called?',
+                options: [
+                    { text: 'A normal market correction', correct: false },
+                    { text: 'A honeypot — designed so only scammers can sell', correct: true },
+                    { text: 'Just a glitchy token contract', correct: false },
+                    { text: 'Wait and try selling again later', correct: false }
+                ],
+                lesson: 'Honeypots let you buy but not sell. Before buying unknown tokens, check if other wallets can successfully sell. Use token analyzers.'
+            },
+            {
+                villain: 'centralis',
+                type: 'Smart Contract Risk',
+                scenario: 'You\'re using a DeFi protocol with high yields. You notice the smart contract has an "owner" function that can drain the pool.',
+                question: 'What should you consider?',
+                options: [
+                    { text: 'High yields mean it\'s profitable, ignore the code', correct: false },
+                    { text: 'Owner functions are admin backdoors — major risk', correct: true },
+                    { text: 'All contracts have owner functions', correct: false },
+                    { text: 'If yields are high, the risk is worth it', correct: false }
+                ],
+                lesson: 'Smart contracts with owner/admin functions that can withdraw funds are risky. Look for contracts that are immutable or have proper governance.'
+            }
+        ];
+
+        // Shuffle array
+        function shuffle(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Show Lumi message
+        function showLumi(text, duration = 4000) {
+            const bubble = document.getElementById('lumi-bubble');
+            const lumiText = document.getElementById('lumi-text');
+            lumiText.textContent = text;
+            bubble.classList.add('show');
+            setTimeout(() => bubble.classList.remove('show'), duration);
+        }
+
+        // Start game
+        function startGame() {
+            score = 0;
+            health = 100;
+            wave = 1;
+            currentChallenge = 0;
+            correctAnswers = 0;
+
+            document.getElementById('score').textContent = '0';
+            document.getElementById('wave').textContent = '1';
+            document.getElementById('health-fill').style.width = '100%';
+
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'none';
+            document.getElementById('challenge-screen').style.display = 'block';
+
+            showLumi('The Shadow Syndicate attacks! Stay vigilant, seeker.');
+
+            setTimeout(() => loadChallenge(), 500);
+        }
+
+        // Load challenge
+        function loadChallenge() {
+            const challengeIndex = (wave - 1) * challengesPerWave + currentChallenge;
+
+            if (challengeIndex >= challenges.length || wave > maxWaves) {
+                endGame(true);
+                return;
+            }
+
+            const challenge = challenges[challengeIndex];
+            const villain = villains[challenge.villain];
+
+            document.getElementById('wave-indicator').textContent = `Wave ${wave} of ${maxWaves}`;
+            document.getElementById('villain-icon').textContent = villain.icon;
+            document.getElementById('villain-name').textContent = villain.name;
+            document.getElementById('challenge-type').textContent = challenge.type;
+            document.getElementById('challenge-scenario').textContent = challenge.scenario;
+            document.getElementById('challenge-text').textContent = challenge.question;
+
+            const optionsContainer = document.getElementById('options');
+            const shuffledOptions = shuffle(challenge.options);
+
+            optionsContainer.innerHTML = shuffledOptions.map((opt, i) =>
+                `<button class="option-btn" onclick="selectAnswer(${challenges[challengeIndex].options.indexOf(opt)}, this)">${opt.text}</button>`
+            ).join('');
+
+            startTimer();
+        }
+
+        // Timer
+        function startTimer() {
+            timeLeft = 100;
+            const timerFill = document.getElementById('timer-fill');
+            timerFill.style.width = '100%';
+
+            if (timer) clearInterval(timer);
+
+            timer = setInterval(() => {
+                timeLeft -= 2;
+                timerFill.style.width = timeLeft + '%';
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    handleTimeout();
+                }
+            }, 200);
+        }
+
+        // Handle timeout
+        function handleTimeout() {
+            takeDamage();
+            showLumi('Time\'s up! The shadows took advantage of your hesitation.');
+            setTimeout(() => nextChallenge(), 1500);
+        }
+
+        // Select answer
+        function selectAnswer(optionIndex, button) {
+            clearInterval(timer);
+
+            const challengeIndex = (wave - 1) * challengesPerWave + currentChallenge;
+            const challenge = challenges[challengeIndex];
+            const isCorrect = challenge.options[optionIndex].correct;
+
+            // Disable all buttons
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                button.classList.add('correct');
+                score += 100 + Math.floor(timeLeft);
+                correctAnswers++;
+                document.getElementById('score').textContent = score;
+                showLumi(challenge.lesson, 5000);
+            } else {
+                button.classList.add('wrong');
+                // Show correct answer
+                document.querySelectorAll('.option-btn').forEach((btn, i) => {
+                    const originalIndex = challenge.options.findIndex(opt => opt.text === btn.textContent);
+                    if (challenge.options[originalIndex].correct) {
+                        btn.classList.add('correct');
+                    }
+                });
+                takeDamage();
+                showLumi('That wasn\'t right. Remember: ' + challenge.lesson, 5000);
+            }
+
+            setTimeout(() => nextChallenge(), 2000);
+        }
+
+        // Take damage
+        function takeDamage() {
+            health -= 25;
+            document.getElementById('health-fill').style.width = health + '%';
+
+            if (health <= 0) {
+                setTimeout(() => endGame(false), 500);
+            }
+        }
+
+        // Next challenge
+        function nextChallenge() {
+            if (health <= 0) return;
+
+            currentChallenge++;
+
+            if (currentChallenge >= challengesPerWave) {
+                currentChallenge = 0;
+                wave++;
+                document.getElementById('wave').textContent = wave;
+
+                if (wave > maxWaves) {
+                    endGame(true);
+                    return;
+                }
+
+                showLumi(`Wave ${wave} begins! The shadows grow stronger.`);
+            }
+
+            loadChallenge();
+        }
+
+        // End game
+        function endGame(victory) {
+            clearInterval(timer);
+
+            document.getElementById('challenge-screen').style.display = 'none';
+            const resultScreen = document.getElementById('result-screen');
+            resultScreen.style.display = 'block';
+            resultScreen.className = victory ? 'victory' : 'defeat';
+
+            document.getElementById('result-title').textContent = victory ? 'VICTORY' : 'DEFEATED';
+            document.getElementById('result-subtitle').textContent = victory
+                ? 'You defended against the Shadow Syndicate!'
+                : 'The shadows overwhelmed your defenses...';
+
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('correct-count').textContent = correctAnswers;
+            document.getElementById('waves-survived').textContent = Math.min(wave, maxWaves);
+
+            const lessons = [
+                'Never share your seed phrase — it\'s the master key to everything.',
+                'Verify URLs carefully. Scammers create lookalike sites.',
+                'Not your keys, not your coins. Self-custody matters.',
+                'FOMO is a manipulation tool. Take time to research.',
+                'If it sounds too good to be true, it probably is.'
+            ];
+
+            document.getElementById('lesson-text').textContent = lessons[Math.floor(Math.random() * lessons.length)];
+
+            if (victory) {
+                showLumi('Incredible, seeker! You are ready to become a Guardian!', 6000);
+            } else {
+                showLumi('Don\'t give up. Every defeat teaches us. Try again!', 6000);
+            }
+        }
+
+        // Restart game
+        function restartGame() {
+            document.getElementById('result-screen').style.display = 'none';
+            document.getElementById('title-screen').style.display = 'block';
+        }
+
+        // Initialize
+        showLumi('Welcome, seeker! Ready to test your defenses?', 5000);
+    </script>
+</body>
+
+</html>
