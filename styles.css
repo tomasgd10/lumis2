@@ -298,8 +298,8 @@ body {
 
 .scroll-button-icon {
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 32px;
+    height: 32px;
     border: 2px solid var(--cyber-cyan);
     border-radius: 50%;
     display: flex;
@@ -320,7 +320,7 @@ body {
 .scroll-button-icon::after {
     content: '';
     position: absolute;
-    inset: -8px;
+    inset: -5px;
     border: 1px solid hsla(180, 100%, 43%, 0.3);
     border-radius: 50%;
     animation: ringPulse 2s ease-in-out infinite;
@@ -329,13 +329,12 @@ body {
 /* Stylized chevron arrow */
 .scroll-button-icon::before {
     content: '';
-    width: 14px;
-    height: 14px;
-    border-right: 3px solid var(--cyber-cyan);
-    border-bottom: 3px solid var(--cyber-cyan);
-    transform: rotate(45deg) translateY(-3px);
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--cyber-cyan);
+    border-bottom: 2px solid var(--cyber-cyan);
+    transform: rotate(45deg) translate(-1px, -1px);
     filter: drop-shadow(0 0 6px var(--cyber-cyan));
-    animation: arrowBounce 1.5s ease-in-out infinite;
     transition: all 0.3s ease;
 }
 
@@ -391,14 +390,6 @@ body {
     }
 }
 
-@keyframes arrowBounce {
-    0%, 100% {
-        transform: rotate(45deg) translateY(-3px);
-    }
-    50% {
-        transform: rotate(45deg) translateY(2px);
-    }
-}
 
 /* ===========================
    TYPOGRAPHY UTILITIES
@@ -620,7 +611,7 @@ body {
 
 .hero-video-fade-top {
     top: 0;
-    background: linear-gradient(to bottom, var(--cyber-bg) 0%, var(--cyber-bg) 20%, transparent 100%);
+    background: transparent;
 }
 
 .hero-video-fade-bottom {
