@@ -522,3 +522,231 @@ console.log(`
 console.log('%cDeveloper Commands:', 'color: #ff7f50; font-weight: bold; font-size: 14px;');
 console.log('%cresetProgress() %c- Reset all journey progress', 'color: #00d4ff', 'color: #999');
 console.log('%cjourneyState %c- View current progress', 'color: #00d4ff', 'color: #999');
+
+// ===========================
+// INTERACTIVE BLOCK BUBBLE LOGO
+// ===========================
+
+class BubbleLogo {
+    constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) return;
+
+        this.ctx = this.canvas.getContext('2d', { alpha: true });
+        this.width = this.canvas.width;
+        this.height = this.canvas.height;
+        this.centerX = this.width / 2;
+        this.centerY = this.height / 2;
+        this.radius = 75;
+        this.blockSize = 6;
+        this.blocks = [];
+        this.mouseX = null;
+        this.mouseY = null;
+        this.repelRadius = 35;
+        this.repelStrength = 20;
+        this.isHovering = false;
+        this.animationId = null;
+
+        // Letter awakening
+        this.hoverStartTime = null;
+        this.hasMovedOnBubble = false;
+        this.lettersAwakened = false;
+
+        this.init();
+        this.bindEvents();
+        this.draw(); // Initial draw
+    }
+
+    init() {
+        // Create blocks in a grid pattern within circle - more efficient
+        const spacing = this.blockSize + 3;
+        for (let x = this.centerX - this.radius; x <= this.centerX + this.radius; x += spacing) {
+            for (let y = this.centerY - this.radius; y <= this.centerY + this.radius; y += spacing) {
+                const distFromCenter = Math.sqrt(
+                    Math.pow(x - this.centerX, 2) +
+                    Math.pow(y - this.centerY, 2)
+                );
+
+                if (distFromCenter <= this.radius) {
+                    this.blocks.push({
+                        origX: x,
+                        origY: y,
+                        x: x,
+                        y: y,
+                        size: this.blockSize,
+                        opacity: 0.75 + Math.random() * 0.25,
+                        color: `hsl(${180 + Math.random() * 15 - 7}, 100%, 50%)`
+                    });
+                }
+            }
+        }
+    }
+
+    bindEvents() {
+        const container = this.canvas.parentElement;
+
+        container.addEventListener('mouseenter', () => {
+            this.isHovering = true;
+            this.hoverStartTime = Date.now();
+            this.hasMovedOnBubble = false;
+            this.startAnimation();
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = this.canvas.getBoundingClientRect();
+            this.mouseX = e.clientX - rect.left;
+            this.mouseY = e.clientY - rect.top;
+            this.hasMovedOnBubble = true;
+
+            // Check if we've been hovering with movement for 1.5 seconds
+            if (!this.lettersAwakened && this.hoverStartTime && this.hasMovedOnBubble) {
+                const elapsed = Date.now() - this.hoverStartTime;
+                if (elapsed >= 1500) {
+                    this.awakenLetters();
+                }
+            }
+        });
+
+        container.addEventListener('mouseleave', () => {
+            this.isHovering = false;
+            this.mouseX = null;
+            this.mouseY = null;
+            this.hoverStartTime = null;
+            this.hasMovedOnBubble = false;
+            // Animate back to original position then stop
+            this.returnToOriginal();
+        });
+    }
+
+    awakenLetters() {
+        if (this.lettersAwakened) return;
+        this.lettersAwakened = true;
+
+        const letters = document.querySelectorAll('.hero-letter');
+        const delayBetween = 400; // 400ms between each letter
+        const holdDuration = 1500; // How long letters stay lit after last one
+
+        letters.forEach((letter, index) => {
+            setTimeout(() => {
+                letter.classList.add('awakened');
+                letter.classList.add('flash');
+
+                // Remove flash effect after animation
+                setTimeout(() => {
+                    letter.classList.remove('flash');
+                }, 500);
+            }, index * delayBetween);
+        });
+
+        // Remove all awakened classes after the sequence completes
+        const totalDuration = (letters.length * delayBetween) + holdDuration;
+        setTimeout(() => {
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.classList.remove('awakened');
+                }, index * 150); // Fade out one by one
+            });
+
+            // Reset so it can be triggered again
+            setTimeout(() => {
+                this.lettersAwakened = false;
+            }, letters.length * 150 + 500);
+        }, totalDuration);
+    }
+
+    startAnimation() {
+        if (this.animationId) return;
+        this.animate();
+    }
+
+    stopAnimation() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+        }
+    }
+
+    returnToOriginal() {
+        let settled = true;
+        this.blocks.forEach(block => {
+            const dx = block.origX - block.x;
+            const dy = block.origY - block.y;
+            if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+                settled = false;
+                block.x += dx * 0.12;
+                block.y += dy * 0.12;
+            } else {
+                block.x = block.origX;
+                block.y = block.origY;
+            }
+        });
+
+        this.draw();
+
+        if (!settled) {
+            this.animationId = requestAnimationFrame(() => this.returnToOriginal());
+        } else {
+            this.stopAnimation();
+        }
+    }
+
+    update() {
+        this.blocks.forEach(block => {
+            let targetX = block.origX;
+            let targetY = block.origY;
+
+            if (this.mouseX !== null && this.mouseY !== null) {
+                const dx = block.origX - this.mouseX;
+                const dy = block.origY - this.mouseY;
+                const distSq = dx * dx + dy * dy;
+                const repelRadiusSq = this.repelRadius * this.repelRadius;
+
+                if (distSq < repelRadiusSq) {
+                    const dist = Math.sqrt(distSq);
+                    const force = (1 - dist / this.repelRadius) * this.repelStrength;
+                    targetX = block.origX + (dx / dist) * force;
+                    targetY = block.origY + (dy / dist) * force;
+                }
+            }
+
+            block.x += (targetX - block.x) * 0.18;
+            block.y += (targetY - block.y) * 0.18;
+        });
+    }
+
+    draw() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        // No shadow - much better performance
+        this.ctx.shadowBlur = 0;
+
+        this.blocks.forEach(block => {
+            this.ctx.globalAlpha = block.opacity;
+            this.ctx.fillStyle = block.color;
+            this.ctx.fillRect(
+                block.x - block.size / 2,
+                block.y - block.size / 2,
+                block.size,
+                block.size
+            );
+        });
+
+        this.ctx.globalAlpha = 1;
+    }
+
+    animate() {
+        if (!this.isHovering) return;
+
+        // Throttle to ~30fps for better performance
+        setTimeout(() => {
+            this.update();
+            this.draw();
+            this.animationId = requestAnimationFrame(() => this.animate());
+        }, 33);
+    }
+}
+
+// Initialize bubble logo when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new BubbleLogo('bubbleLogo');
+});
