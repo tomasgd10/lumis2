@@ -623,34 +623,31 @@ class BubbleLogo {
         this.lettersAwakened = true;
 
         const letters = document.querySelectorAll('.hero-letter');
-        const delayBetween = 400; // 400ms between each letter
-        const holdDuration = 1500; // How long letters stay lit after last one
+        const delayBetween = 600; // 600ms between each letter
+        const holdDuration = 4000; // How long letters stay lit after last one
 
         letters.forEach((letter, index) => {
             setTimeout(() => {
                 letter.classList.add('awakened');
-                letter.classList.add('flash');
-
-                // Remove flash effect after animation
-                setTimeout(() => {
-                    letter.classList.remove('flash');
-                }, 500);
             }, index * delayBetween);
         });
 
-        // Remove all awakened classes after the sequence completes
+        // Fade out all letters slowly after the sequence completes
         const totalDuration = (letters.length * delayBetween) + holdDuration;
         setTimeout(() => {
-            letters.forEach((letter, index) => {
-                setTimeout(() => {
-                    letter.classList.remove('awakened');
-                }, index * 150); // Fade out one by one
+            // Add fading class for slow transition, then remove awakened
+            letters.forEach((letter) => {
+                letter.classList.add('fading');
+                letter.classList.remove('awakened');
             });
 
-            // Reset so it can be triggered again
+            // Reset so it can be triggered again after fade completes
             setTimeout(() => {
+                letters.forEach((letter) => {
+                    letter.classList.remove('fading');
+                });
                 this.lettersAwakened = false;
-            }, letters.length * 150 + 500);
+            }, 5500); // Wait for 5s fade + buffer
         }, totalDuration);
     }
 
