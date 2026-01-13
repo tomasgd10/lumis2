@@ -18,6 +18,17 @@
     <!-- Overlays -->
     <div class="vignette"></div>
 
+    <!-- Portal Overlay for Realm Transitions -->
+    <div class="portal-overlay" id="portalOverlay">
+        <div class="portal-container">
+            <div class="portal-ring portal-ring-outer"></div>
+            <div class="portal-ring portal-ring-middle"></div>
+            <div class="portal-ring portal-ring-inner"></div>
+            <div class="portal-core"></div>
+            <div class="portal-particles" id="portalParticles"></div>
+        </div>
+    </div>
+
     <!-- Corner Crosshairs -->
     <div class="crosshair crosshair-tl"></div>
     <div class="crosshair crosshair-tr"></div>
@@ -29,10 +40,11 @@
         <span class="logo-text">LUMIS</span>
     </div>
 
-    <!-- Enter Button -->
-    <a href="#journey" class="enter-button">
-        <span>ENTER THE LUMISVERSE</span>
-    </a>
+    <!-- Claude Code Badge -->
+    <div class="claude-badge">
+        <span class="claude-badge-label">DRIVEN & ARCHITECTED BY</span>
+        <img src="claude-logo.png" alt="Claude Code" class="claude-badge-logo">
+    </div>
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar-nav">
@@ -66,29 +78,6 @@
 
             <!-- Section Vignette -->
             <div class="section-vignette"></div>
-
-            <!-- Background Symbol -->
-            <div class="hero-symbol flicker">
-                <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" style="color: var(--cyber-cyan);">
-                    <circle cx="100" cy="100" r="90" opacity="0.5" />
-                    <circle cx="100" cy="70" r="40" opacity="0.6" />
-                    <circle cx="70" cy="120" r="30" opacity="0.6" />
-                    <circle cx="130" cy="120" r="30" opacity="0.6" />
-                    <circle cx="100" cy="100" r="60" opacity="0.3" />
-                    <!-- Lumis Star -->
-                    <path d="M100 30 L105 90 L160 100 L105 110 L100 170 L95 110 L40 100 L95 90 Z" opacity="0.4" />
-                </svg>
-            </div>
-
-            <!-- Terminal Log - Top Right -->
-            <div class="terminal-log hide-mobile">
-                <p class="blue-text">$ sudo lumisverse.exe --init-cosmic-protocol</p>
-                <p>Reality weave initiated... <span class="orange-text">STATUS:</span> Active</p>
-                <p class="blue-text">$ query:</p>
-                <p>Seekers detected: <span class="blue-text">∞</span> | Realms online: <span class="orange-text">3</span></p>
-                <p class="orange-text">awaiting:</p>
-                <p>New Luminari candidate... <span class="blue-text">YOU</span></p>
-            </div>
 
             <div class="hero-content">
                 <h1 class="hero-title-main">
@@ -474,8 +463,8 @@
             </div>
 
             <div class="realms-grid">
-                <div class="realm-card">
-                    <div class="realm-icon blue-text">◈</div>
+                <div class="realm-card realm-card-clickable" onclick="enterRealm('bitcoin')">
+                    <img src="bitcoin-logo.png" alt="Bitcoin" class="realm-logo gold-glow">
                     <h3 class="realm-name">ORIGIN CITADEL</h3>
                     <div class="realm-blockchain terminal-text">BITCOIN</div>
                     <p class="realm-description">
@@ -483,10 +472,11 @@
                         absolute trust, the foundation of the entire Lumisverse.
                     </p>
                     <div class="realm-values">
-                        <span class="realm-tag">Security</span>
-                        <span class="realm-tag">Immutability</span>
-                        <span class="realm-tag">Trust</span>
+                        <span class="realm-tag gold-tag">Security</span>
+                        <span class="realm-tag gold-tag">Immutability</span>
+                        <span class="realm-tag gold-tag">Trust</span>
                     </div>
+                    <div class="realm-enter-hint">ENTER REALM</div>
                 </div>
 
                 <div class="realm-card">

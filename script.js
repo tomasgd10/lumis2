@@ -623,32 +623,59 @@ class BubbleLogo {
         this.lettersAwakened = true;
 
         const letters = document.querySelectorAll('.hero-letter');
-        const delayBetween = 600; // 600ms between each letter
-        const holdDuration = 4000; // How long letters stay lit after last one
+        const delayBetween = 800; // Delay between each letter starting
+        const stepDuration = 140; // 0.7s / 5 steps = 140ms per step
+        const holdDuration = 5000; // How long letters stay lit after last one fully lit
+        const brightnessLevels = ['brightness-20', 'brightness-40', 'brightness-60', 'brightness-80', 'awakened'];
 
         letters.forEach((letter, index) => {
+            // Start this letter's gradual light-up after delay
             setTimeout(() => {
-                letter.classList.add('awakened');
+                // Step through brightness levels
+                brightnessLevels.forEach((level, stepIndex) => {
+                    setTimeout(() => {
+                        // Remove previous brightness level
+                        if (stepIndex > 0) {
+                            letter.classList.remove(brightnessLevels[stepIndex - 1]);
+                        }
+                        letter.classList.add(level);
+                    }, stepIndex * stepDuration);
+                });
             }, index * delayBetween);
         });
 
-        // Fade out all letters slowly after the sequence completes
-        const totalDuration = (letters.length * delayBetween) + holdDuration;
+        // Fade out all letters gradually after the sequence completes
+        const totalLightUpTime = (letters.length * delayBetween) + (brightnessLevels.length * stepDuration);
+        const fadeOutStart = totalLightUpTime + holdDuration;
+
         setTimeout(() => {
-            // Add fading class for slow transition, then remove awakened
-            letters.forEach((letter) => {
-                letter.classList.add('fading');
-                letter.classList.remove('awakened');
+            // Gradually fade out each letter
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    // Reverse through brightness levels
+                    const reverseLevels = ['awakened', 'brightness-80', 'brightness-60', 'brightness-40', 'brightness-20', ''];
+                    reverseLevels.forEach((level, stepIndex) => {
+                        setTimeout(() => {
+                            if (stepIndex > 0) {
+                                letter.classList.remove(reverseLevels[stepIndex - 1]);
+                            }
+                            if (level) {
+                                letter.classList.add(level);
+                            } else {
+                                // Final step - remove all classes
+                                letter.classList.remove('brightness-20');
+                            }
+                        }, stepIndex * stepDuration);
+                    });
+                }, index * 150); // Stagger fade out slightly
             });
 
-            // Reset so it can be triggered again after fade completes
+            // Reset so it can be triggered again
+            const fadeOutDuration = (letters.length * 150) + (6 * stepDuration) + 500;
             setTimeout(() => {
-                letters.forEach((letter) => {
-                    letter.classList.remove('fading');
-                });
                 this.lettersAwakened = false;
-            }, 5500); // Wait for 5s fade + buffer
-        }, totalDuration);
+            }, fadeOutDuration);
+        }, fadeOutStart);
     }
 
     startAnimation() {
@@ -747,3 +774,57 @@ class BubbleLogo {
 document.addEventListener('DOMContentLoaded', () => {
     new BubbleLogo('bubbleLogo');
 });
+
+// ===========================
+// REALM PORTAL TRANSITION
+// ===========================
+
+function enterRealm(realmName) {
+    const overlay = document.getElementById('portalOverlay');
+    const particlesContainer = document.getElementById('portalParticles');
+
+    if (!overlay) return;
+
+    // Show portal overlay
+    overlay.classList.add('active');
+
+    // Create particles
+    function createParticles(count) {
+        for (let i = 0; i < count; i++) {
+            setTimeout(() => {
+                const particle = document.createElement('div');
+                particle.className = 'portal-particle';
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 100 + Math.random() * 150;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+                particle.style.animationDelay = `${Math.random() * 0.5}s`;
+                particle.style.animationDuration = `${1 + Math.random()}s`;
+
+                particlesContainer.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 2000);
+            }, i * 50);
+        }
+    }
+
+    // Start particle effects
+    setTimeout(() => createParticles(40), 500);
+    setTimeout(() => createParticles(30), 1500);
+
+    // Expand portal and navigate
+    setTimeout(() => {
+        overlay.classList.add('expanding');
+    }, 2500);
+
+    // Navigate to realm page
+    setTimeout(() => {
+        window.location.href = `${realmName}.html?portal=true`;
+    }, 3200);
+}

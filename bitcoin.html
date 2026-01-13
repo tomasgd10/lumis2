@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin Citadel - Bitcoin Realm | LUMIS</title>
+    <meta name="description" content="Enter the Origin Citadel, the first realm of the Lumisverse. Discover the immutable power of Bitcoin.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="bitcoin-realm.css">
+</head>
+<body class="bitcoin-realm">
+    <!-- Portal Overlay (for entry animation) -->
+    <div class="portal-overlay" id="portalOverlay">
+        <div class="portal-container">
+            <div class="portal-ring portal-ring-outer"></div>
+            <div class="portal-ring portal-ring-middle"></div>
+            <div class="portal-ring portal-ring-inner"></div>
+            <div class="portal-core"></div>
+            <div class="portal-particles" id="portalParticles"></div>
+        </div>
+    </div>
+
+    <!-- Overlays -->
+    <div class="vignette"></div>
+
+    <!-- Corner Crosshairs -->
+    <div class="crosshair crosshair-tl"></div>
+    <div class="crosshair crosshair-tr"></div>
+    <div class="crosshair crosshair-bl"></div>
+    <div class="crosshair crosshair-br"></div>
+
+    <!-- Back Navigation -->
+    <a href="index.html" class="back-button">
+        <span class="back-arrow">&larr;</span>
+        <span>RETURN TO LUMISVERSE</span>
+    </a>
+
+    <!-- Main Container -->
+    <div class="container" id="scroll-container">
+
+        <!-- Hero Section -->
+        <section id="realm-hero" class="section realm-hero-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="realm-hero-content">
+                <div class="realm-badge">
+                    <span class="badge-icon">&#9672;</span>
+                    <span class="badge-text">THE FIRST REALM</span>
+                </div>
+
+                <h1 class="realm-title">
+                    <span class="realm-title-line">ORIGIN</span>
+                    <span class="realm-title-line gold-text">CITADEL</span>
+                </h1>
+
+                <div class="realm-blockchain-badge">
+                    <span class="chain-icon">&#8383;</span>
+                    <span class="chain-name">BITCOIN</span>
+                </div>
+
+                <p class="realm-description">
+                    Where it all began. The <span class="gold-text">Origin Citadel</span> stands as the immutable fortress
+                    of the Lumisverse—a beacon of <span class="gold-text">decentralized truth</span> that has never fallen,
+                    never been corrupted, and never will be.
+                </p>
+
+                <div class="realm-stats">
+                    <div class="realm-stat">
+                        <div class="stat-value gold-text">2009</div>
+                        <div class="stat-label">Genesis Year</div>
+                    </div>
+                    <div class="realm-stat">
+                        <div class="stat-value gold-text">21M</div>
+                        <div class="stat-label">Max Supply</div>
+                    </div>
+                    <div class="realm-stat">
+                        <div class="stat-value gold-text">100%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button gold-scroll" onclick="scrollToSection('realm-powers')">
+                <div class="scroll-button-icon">&#8595;</div>
+                <div class="scroll-button-text">Discover Powers</div>
+            </div>
+        </section>
+
+        <!-- Realm Powers Section -->
+        <section id="realm-powers" class="section realm-powers-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    POWERS OF THE <span class="gold-text">CITADEL</span>
+                </h2>
+                <p class="section-subtitle terminal-text gold-terminal">The sacred attributes that define the First Realm</p>
+            </div>
+
+            <div class="powers-grid">
+                <div class="power-card">
+                    <div class="power-icon gold-text">&#9830;</div>
+                    <h3 class="power-name">IMMUTABILITY</h3>
+                    <p class="power-description">
+                        Once written to the chain, transactions become eternal truth.
+                        No king, no corporation, no army can alter the ledger.
+                    </p>
+                    <div class="power-quote">"Code is law. The chain remembers all."</div>
+                </div>
+
+                <div class="power-card">
+                    <div class="power-icon gold-text">&#9670;</div>
+                    <h3 class="power-name">SCARCITY</h3>
+                    <p class="power-description">
+                        21 million. No more, no less. Digital gold forged from mathematics,
+                        immune to the printing press of empires.
+                    </p>
+                    <div class="power-quote">"Scarcity creates value. Value creates freedom."</div>
+                </div>
+
+                <div class="power-card">
+                    <div class="power-icon gold-text">&#9674;</div>
+                    <h3 class="power-name">DECENTRALIZATION</h3>
+                    <p class="power-description">
+                        Thousands of nodes across the world, each holding the complete truth.
+                        No single point of failure. No master to serve.
+                    </p>
+                    <div class="power-quote">"Power distributed is power preserved."</div>
+                </div>
+
+                <div class="power-card">
+                    <div class="power-icon gold-text">&#9679;</div>
+                    <h3 class="power-name">SECURITY</h3>
+                    <p class="power-description">
+                        Protected by the most powerful computing network in human history.
+                        The Citadel's walls have never been breached.
+                    </p>
+                    <div class="power-quote">"The chain stands eternal."</div>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button gold-scroll" onclick="scrollToSection('realm-faq')">
+                <div class="scroll-button-icon">&#8595;</div>
+                <div class="scroll-button-text">Common Questions</div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="realm-faq" class="section realm-faq-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    WISDOM OF THE <span class="gold-text">CITADEL</span>
+                </h2>
+                <p class="section-subtitle terminal-text gold-terminal">Seekers often ask these questions</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item" data-faq="1">
+                    <div class="faq-header" onclick="toggleFaq(1)">
+                        <span class="faq-question">What is Bitcoin?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-1">
+                        <p>Bitcoin is a <span class="gold-text">decentralized digital currency</span>—the first of its kind.
+                        Created in 2009 by the pseudonymous Satoshi Nakamoto, it operates without banks,
+                        governments, or intermediaries. Transactions are verified by network nodes through
+                        cryptography and recorded on a public ledger called the <span class="gold-text">blockchain</span>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="2">
+                    <div class="faq-header" onclick="toggleFaq(2)">
+                        <span class="faq-question">Why is Bitcoin valuable?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-2">
+                        <p>Bitcoin derives value from its <span class="gold-text">scarcity</span> (only 21 million will ever exist),
+                        its <span class="gold-text">security</span> (protected by massive computing power), its <span class="gold-text">immutability</span>
+                        (transactions cannot be reversed), and its <span class="gold-text">decentralization</span> (no single entity controls it).
+                        Like gold, it serves as a store of value—but unlike gold, it can be transferred globally in minutes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="3">
+                    <div class="faq-header" onclick="toggleFaq(3)">
+                        <span class="faq-question">How does mining work?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-3">
+                        <p>Mining is the process by which new Bitcoin is created and transactions are verified.
+                        Miners use powerful computers to solve complex mathematical puzzles. The first to solve
+                        the puzzle gets to add a new <span class="gold-text">block</span> to the blockchain and receives newly minted
+                        Bitcoin as a reward. This process, called <span class="gold-text">Proof of Work</span>, secures the network
+                        and ensures no one can cheat the system.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="4">
+                    <div class="faq-header" onclick="toggleFaq(4)">
+                        <span class="faq-question">What is the halving?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-4">
+                        <p>Every 210,000 blocks (approximately 4 years), the reward for mining Bitcoin is cut in half.
+                        This event is called the <span class="gold-text">halving</span>. It ensures Bitcoin's supply grows slower over time,
+                        making it increasingly scarce. The halving continues until all 21 million Bitcoin are mined,
+                        estimated around the year 2140.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="5">
+                    <div class="faq-header" onclick="toggleFaq(5)">
+                        <span class="faq-question">Is Bitcoin safe?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-5">
+                        <p>The Bitcoin network itself has <span class="gold-text">never been hacked</span>. It's protected by more computing
+                        power than any other network on Earth. However, individual users must protect their own
+                        <span class="gold-text">private keys</span>. If you control your keys (self-custody), your Bitcoin is secure.
+                        If you leave them with an exchange, you trust that exchange with your wealth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button gold-scroll" onclick="scrollToSection('realm-quiz')">
+                <div class="scroll-button-icon">&#8595;</div>
+                <div class="scroll-button-text">Test Your Knowledge</div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="realm-quiz" class="section realm-quiz-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    TRIAL OF THE <span class="gold-text">CITADEL</span>
+                </h2>
+                <p class="section-subtitle terminal-text gold-terminal">Prove your understanding of the First Realm</p>
+            </div>
+
+            <div class="realm-quiz-container">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                    </div>
+                    <div class="quiz-progress-text" id="quizProgressText">Question 1 of 5</div>
+                </div>
+
+                <div class="quiz-question-container" id="quizQuestionContainer">
+                    <!-- Questions will be loaded dynamically -->
+                </div>
+
+                <div class="quiz-result" id="quizResult" style="display: none;">
+                    <div class="result-icon" id="resultIcon"></div>
+                    <h3 class="result-title" id="resultTitle"></h3>
+                    <p class="result-message" id="resultMessage"></p>
+                    <button class="btn-gold" onclick="restartQuiz()">TRY AGAIN</button>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button gold-scroll" onclick="scrollToSection('realm-legends')">
+                <div class="scroll-button-icon">&#8595;</div>
+                <div class="scroll-button-text">Meet the Legends</div>
+            </div>
+        </section>
+
+        <!-- Legends Section -->
+        <section id="realm-legends" class="section realm-legends-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    LEGENDS OF THE <span class="gold-text">CITADEL</span>
+                </h2>
+                <p class="section-subtitle terminal-text gold-terminal">Those who shaped the First Realm</p>
+            </div>
+
+            <div class="legends-grid">
+                <div class="legend-card">
+                    <div class="legend-avatar">
+                        <span class="legend-initial">S</span>
+                    </div>
+                    <h3 class="legend-name">SATOSHI NAKAMOTO</h3>
+                    <div class="legend-title">The Creator</div>
+                    <p class="legend-description">
+                        The mysterious architect who designed and launched Bitcoin,
+                        then vanished into the digital ether. Identity unknown. Legacy eternal.
+                    </p>
+                </div>
+
+                <div class="legend-card">
+                    <div class="legend-avatar">
+                        <span class="legend-initial">H</span>
+                    </div>
+                    <h3 class="legend-name">HAL FINNEY</h3>
+                    <div class="legend-title">First Disciple</div>
+                    <p class="legend-description">
+                        Received the first Bitcoin transaction. Cryptographer, cypherpunk,
+                        and early believer who saw the revolution before it began.
+                    </p>
+                </div>
+
+                <div class="legend-card">
+                    <div class="legend-avatar">
+                        <span class="legend-initial">N</span>
+                    </div>
+                    <h3 class="legend-name">NICK SZABO</h3>
+                    <div class="legend-title">The Philosopher</div>
+                    <p class="legend-description">
+                        Creator of "Bit Gold" concept. His ideas on smart contracts and
+                        digital currency laid the intellectual foundation for the Citadel.
+                    </p>
+                </div>
+
+                <div class="legend-card">
+                    <div class="legend-avatar">
+                        <span class="legend-initial">A</span>
+                    </div>
+                    <h3 class="legend-name">ADAM BACK</h3>
+                    <div class="legend-title">The Architect</div>
+                    <p class="legend-description">
+                        Inventor of Hashcash, the proof-of-work system that became
+                        the backbone of Bitcoin's security. A pillar of the cypherpunk movement.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="realm-cta">
+                <h3 class="cta-title">YOUR JOURNEY CONTINUES</h3>
+                <p class="cta-text">
+                    The Origin Citadel is but the first realm. More await your discovery.
+                </p>
+                <a href="index.html#realms" class="btn-gold">EXPLORE OTHER REALMS</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer realm-footer">
+            <div class="footer-content">
+                <div class="footer-logo gold-text">LUMIS</div>
+                <div class="footer-tagline terminal-text gold-terminal">
+                    "The Citadel stands eternal. The chain remembers all."
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="index.html#journey" class="footer-link">Journey</a>
+                    <a href="index.html#realms" class="footer-link">Realms</a>
+                    <a href="index.html#shadows" class="footer-link">Shadows</a>
+                    <a href="lumi-chat.html" class="footer-link">Lumi AI</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>The chains are calling. Your journey awaits. Step into the light.</p>
+                    <p class="terminal-text gold-terminal">MIT License - The light belongs to everyone</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script src="bitcoin-realm.js"></script>
+</body>
+</html>

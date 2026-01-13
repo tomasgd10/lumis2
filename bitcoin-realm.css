@@ -1,0 +1,934 @@
+/* ===========================
+   BITCOIN REALM - GOLDEN THEME
+   Origin Citadel Styling
+   =========================== */
+
+/* Golden Color Variables */
+.bitcoin-realm {
+    --gold-primary: #FFD700;
+    --gold-secondary: #FFA500;
+    --gold-dark: #FF8C00;
+    --gold-glow: 0 0 30px hsla(43, 100%, 50%, 0.5), 0 0 60px hsla(43, 100%, 50%, 0.3);
+    --gold-shadow: 0 0 20px hsla(43, 100%, 50%, 0.3);
+}
+
+/* Golden Text */
+.gold-text {
+    color: var(--gold-primary) !important;
+}
+
+/* Golden Terminal Text */
+.gold-terminal::before {
+    color: var(--gold-primary) !important;
+}
+
+/* ===========================
+   PORTAL ANIMATION
+   =========================== */
+
+.portal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: hsla(202, 60%, 5%, 0.98);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.portal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.portal-overlay.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.portal-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Portal Rings */
+.portal-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.portal-ring-outer {
+    width: 350px;
+    height: 350px;
+    border-color: var(--gold-dark);
+    animation: portalRingOuter 3s ease-out forwards;
+}
+
+.portal-ring-middle {
+    width: 250px;
+    height: 250px;
+    border-color: var(--gold-secondary);
+    animation: portalRingMiddle 3s ease-out 0.2s forwards;
+}
+
+.portal-ring-inner {
+    width: 150px;
+    height: 150px;
+    border-color: var(--gold-primary);
+    animation: portalRingInner 3s ease-out 0.4s forwards;
+}
+
+@keyframes portalRingOuter {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(60deg);
+    }
+    50% {
+        transform: scale(1) rotate(120deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@keyframes portalRingMiddle {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(-60deg);
+    }
+    50% {
+        transform: scale(1) rotate(-120deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(-360deg);
+    }
+}
+
+@keyframes portalRingInner {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(90deg);
+    }
+    50% {
+        transform: scale(1) rotate(180deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(720deg);
+    }
+}
+
+/* Portal Core */
+.portal-core {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--gold-primary) 0%, var(--gold-secondary) 50%, transparent 70%);
+    opacity: 0;
+    transform: scale(0);
+    animation: portalCore 3s ease-out 0.6s forwards;
+    box-shadow:
+        0 0 40px var(--gold-primary),
+        0 0 80px var(--gold-secondary),
+        0 0 120px var(--gold-dark);
+}
+
+@keyframes portalCore {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+    70% {
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Portal Particles */
+.portal-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.portal-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--gold-primary);
+    border-radius: 50%;
+    opacity: 0;
+    animation: portalParticle 2s ease-out forwards;
+}
+
+@keyframes portalParticle {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
+    }
+}
+
+/* Portal Expand Animation */
+.portal-overlay.expanding .portal-container {
+    animation: portalExpand 1.5s ease-in-out forwards;
+}
+
+@keyframes portalExpand {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(50);
+        opacity: 0;
+    }
+}
+
+/* ===========================
+   BACK BUTTON
+   =========================== */
+
+.back-button {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    background: transparent;
+    border: 2px solid var(--gold-primary);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: var(--gold-primary);
+    color: var(--cyber-dark);
+    box-shadow: var(--gold-glow);
+}
+
+.back-arrow {
+    font-size: 1.2rem;
+}
+
+/* ===========================
+   REALM HERO SECTION
+   =========================== */
+
+.realm-hero-section {
+    position: relative;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at center, hsla(43, 100%, 50%, 0.05) 0%, transparent 50%),
+        var(--cyber-bg);
+}
+
+.realm-symbol {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.15;
+    filter: blur(2px);
+    z-index: 2;
+    color: var(--gold-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.realm-bg-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px var(--gold-primary));
+}
+
+.realm-hero-content {
+    max-width: 900px;
+    position: relative;
+    z-index: 10;
+}
+
+.realm-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    margin-bottom: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    border: 1px solid hsla(43, 100%, 50%, 0.3);
+    border-radius: 20px;
+    background: hsla(43, 100%, 50%, 0.05);
+}
+
+.badge-icon {
+    font-size: 1rem;
+}
+
+.realm-title {
+    margin-bottom: 30px;
+}
+
+.realm-title-line {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 6rem;
+    font-weight: 900;
+    letter-spacing: 0.3rem;
+    line-height: 1.1;
+    text-shadow: 0 0 40px hsla(43, 100%, 50%, 0.3);
+}
+
+.realm-blockchain-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 25px;
+    margin-bottom: 30px;
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+    color: var(--gold-secondary);
+    border: 2px solid var(--gold-secondary);
+    background: hsla(43, 100%, 50%, 0.1);
+}
+
+.chain-icon {
+    font-size: 1.5rem;
+}
+
+.realm-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 50px;
+    color: var(--muted-foreground);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.realm-stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 60px;
+}
+
+.realm-stat {
+    text-align: center;
+}
+
+.realm-stat .stat-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.realm-stat .stat-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+}
+
+/* Golden Scroll Button */
+.gold-scroll .scroll-button-icon {
+    border-color: var(--gold-primary);
+    background: hsla(43, 100%, 50%, 0.05);
+    box-shadow:
+        0 0 15px hsla(43, 100%, 50%, 0.3),
+        0 0 30px hsla(43, 100%, 50%, 0.2);
+}
+
+.gold-scroll .scroll-button-icon::before {
+    border-color: var(--gold-primary);
+    filter: drop-shadow(0 0 6px var(--gold-primary));
+}
+
+.gold-scroll .scroll-button-icon::after {
+    border-color: hsla(43, 100%, 50%, 0.3);
+}
+
+.gold-scroll .scroll-button-text {
+    color: var(--gold-primary);
+    text-shadow: 0 0 10px hsla(43, 100%, 50%, 0.5);
+}
+
+.gold-scroll:hover .scroll-button-icon {
+    border-color: var(--gold-secondary);
+    box-shadow:
+        0 0 20px var(--gold-primary),
+        0 0 40px var(--gold-primary);
+}
+
+.gold-scroll:hover .scroll-button-text {
+    color: var(--gold-secondary);
+}
+
+/* ===========================
+   POWERS SECTION
+   =========================== */
+
+.realm-powers-section {
+    background: linear-gradient(180deg, var(--cyber-dark) 0%, var(--cyber-bg) 50%, var(--cyber-dark) 100%);
+}
+
+.powers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 60px;
+}
+
+.power-card {
+    background: hsla(202, 50%, 10%, 0.6);
+    border: 1px solid hsla(43, 100%, 50%, 0.2);
+    border-radius: 4px;
+    padding: 35px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.power-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.power-card:hover {
+    border-color: var(--gold-primary);
+    box-shadow: var(--gold-shadow);
+    transform: translateY(-5px);
+}
+
+.power-card:hover::before {
+    opacity: 1;
+}
+
+.power-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px var(--gold-primary));
+}
+
+.power-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.15rem;
+    margin-bottom: 15px;
+    color: var(--gold-primary);
+}
+
+.power-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+    margin-bottom: 20px;
+}
+
+.power-quote {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--gold-secondary);
+    padding-top: 15px;
+    border-top: 1px solid hsla(43, 100%, 50%, 0.2);
+}
+
+/* ===========================
+   FAQ SECTION
+   =========================== */
+
+.realm-faq-section {
+    background: var(--cyber-bg);
+}
+
+.faq-container {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 60px;
+}
+
+.faq-item {
+    background: hsla(202, 50%, 10%, 0.6);
+    border: 1px solid hsla(43, 100%, 50%, 0.2);
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: hsla(43, 100%, 50%, 0.4);
+}
+
+.faq-item.active {
+    border-color: var(--gold-primary);
+    box-shadow: var(--gold-shadow);
+}
+
+.faq-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.faq-header:hover {
+    background: hsla(43, 100%, 50%, 0.05);
+}
+
+.faq-question {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+}
+
+.faq-toggle {
+    font-size: 1.5rem;
+    color: var(--gold-primary);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-toggle {
+    transform: rotate(45deg);
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq-item.active .faq-content {
+    max-height: 500px;
+    padding: 0 25px 25px;
+}
+
+.faq-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--muted-foreground);
+}
+
+/* ===========================
+   QUIZ SECTION
+   =========================== */
+
+.realm-quiz-section {
+    background: linear-gradient(180deg, var(--cyber-dark) 0%, var(--cyber-bg) 50%, var(--cyber-dark) 100%);
+}
+
+.realm-quiz-container {
+    width: 100%;
+    max-width: 700px;
+    background: hsla(202, 50%, 10%, 0.8);
+    border: 1px solid hsla(43, 100%, 50%, 0.3);
+    border-radius: 4px;
+    padding: 40px;
+    margin-bottom: 60px;
+}
+
+.quiz-progress {
+    margin-bottom: 30px;
+}
+
+.quiz-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--muted);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.quiz-progress-fill {
+    height: 100%;
+    width: 20%;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold-primary));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px var(--gold-primary);
+}
+
+.quiz-progress-text {
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    text-align: center;
+}
+
+.quiz-question-container {
+    min-height: 300px;
+}
+
+.realm-quiz-question {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--foreground);
+}
+
+.realm-quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.realm-quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 20px;
+    background: hsla(202, 30%, 15%, 0.5);
+    border: 1px solid hsla(43, 100%, 50%, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.realm-quiz-option:hover {
+    background: hsla(43, 100%, 50%, 0.1);
+    border-color: var(--gold-primary);
+}
+
+.realm-quiz-option.selected {
+    background: hsla(43, 100%, 50%, 0.15);
+    border-color: var(--gold-primary);
+    box-shadow: var(--gold-shadow);
+}
+
+.realm-quiz-option.correct {
+    background: hsla(120, 100%, 40%, 0.2);
+    border-color: hsl(120, 100%, 40%);
+}
+
+.realm-quiz-option.incorrect {
+    background: hsla(0, 100%, 50%, 0.2);
+    border-color: hsl(0, 100%, 50%);
+}
+
+.option-marker {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--gold-primary);
+    border: 2px solid var(--gold-primary);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.option-content {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.quiz-actions {
+    display: flex;
+    justify-content: center;
+}
+
+/* Quiz Result */
+.quiz-result {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.result-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.result-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--gold-primary);
+}
+
+.result-message {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted-foreground);
+    margin-bottom: 30px;
+}
+
+/* ===========================
+   LEGENDS SECTION
+   =========================== */
+
+.realm-legends-section {
+    background: var(--cyber-bg);
+}
+
+.legends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 60px;
+}
+
+.legend-card {
+    background: hsla(202, 50%, 10%, 0.6);
+    border: 1px solid hsla(43, 100%, 50%, 0.2);
+    border-radius: 4px;
+    padding: 35px 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.legend-card:hover {
+    border-color: var(--gold-primary);
+    box-shadow: var(--gold-shadow);
+    transform: translateY(-5px);
+}
+
+.legend-avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px hsla(43, 100%, 50%, 0.3);
+}
+
+.legend-initial {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--cyber-dark);
+}
+
+.legend-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    margin-bottom: 8px;
+    color: var(--gold-primary);
+}
+
+.legend-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    color: var(--gold-secondary);
+    margin-bottom: 15px;
+}
+
+.legend-description {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+}
+
+/* ===========================
+   CALL TO ACTION
+   =========================== */
+
+.realm-cta {
+    text-align: center;
+    max-width: 600px;
+    padding: 50px;
+    background: hsla(202, 60%, 5%, 0.8);
+    border: 1px solid hsla(43, 100%, 50%, 0.3);
+    border-radius: 4px;
+}
+
+.cta-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--gold-primary);
+    margin-bottom: 15px;
+    letter-spacing: 0.1rem;
+}
+
+.cta-text {
+    font-size: 1rem;
+    color: var(--muted-foreground);
+    margin-bottom: 30px;
+}
+
+/* Golden Button */
+.btn-gold {
+    display: inline-block;
+    padding: 15px 40px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.15rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--cyber-dark);
+    background: var(--gold-primary);
+    border: 2px solid var(--gold-primary);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    background: var(--gold-secondary);
+    border-color: var(--gold-secondary);
+    box-shadow: var(--gold-glow);
+}
+
+/* ===========================
+   FOOTER MODIFICATIONS
+   =========================== */
+
+.realm-footer .footer-logo {
+    text-shadow: 0 0 20px hsla(43, 100%, 50%, 0.5);
+}
+
+.realm-footer .footer-link:hover {
+    color: var(--gold-primary);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 1024px) {
+    .realm-title-line {
+        font-size: 4rem;
+    }
+
+    .back-button {
+        top: 20px;
+        left: 20px;
+        font-size: 0.65rem;
+        padding: 10px 18px;
+    }
+
+    .realm-stats {
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .realm-title-line {
+        font-size: 2.8rem;
+    }
+
+    .realm-stats {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .powers-grid,
+    .legends-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .realm-quiz-container {
+        padding: 25px;
+    }
+
+    .back-button span:not(.back-arrow) {
+        display: none;
+    }
+
+    .back-button {
+        padding: 12px;
+    }
+
+    .back-arrow {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .realm-title-line {
+        font-size: 2rem;
+        letter-spacing: 0.1rem;
+    }
+
+    .realm-badge {
+        font-size: 0.65rem;
+    }
+
+    .realm-blockchain-badge {
+        font-size: 0.85rem;
+    }
+}
