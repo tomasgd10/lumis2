@@ -1,0 +1,934 @@
+/* ===========================
+   TRON REALM - RED THEME
+   The Grid Styling
+   =========================== */
+
+/* Red Color Variables */
+.tron-realm {
+    --red-primary: #EF4444;
+    --red-secondary: #DC2626;
+    --red-dark: #991B1B;
+    --red-glow: 0 0 30px hsla(0, 86%, 60%, 0.5), 0 0 60px hsla(0, 86%, 60%, 0.3);
+    --red-shadow: 0 0 20px hsla(0, 86%, 60%, 0.3);
+}
+
+/* Red Text */
+.red-text {
+    color: var(--red-primary) !important;
+}
+
+/* Red Terminal Text */
+.red-terminal::before {
+    color: var(--red-primary) !important;
+}
+
+/* ===========================
+   PORTAL ANIMATION
+   =========================== */
+
+.tron-realm .portal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: hsla(0, 60%, 5%, 0.98);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.tron-realm .portal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.tron-realm .portal-overlay.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.tron-realm .portal-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Portal Rings */
+.tron-realm .portal-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.tron-realm .portal-ring-outer {
+    width: 350px;
+    height: 350px;
+    border-color: var(--red-dark);
+    animation: portalRingOuter 3s ease-out forwards;
+}
+
+.tron-realm .portal-ring-middle {
+    width: 250px;
+    height: 250px;
+    border-color: var(--red-secondary);
+    animation: portalRingMiddle 3s ease-out 0.2s forwards;
+}
+
+.tron-realm .portal-ring-inner {
+    width: 150px;
+    height: 150px;
+    border-color: var(--red-primary);
+    animation: portalRingInner 3s ease-out 0.4s forwards;
+}
+
+@keyframes portalRingOuter {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(60deg);
+    }
+    50% {
+        transform: scale(1) rotate(120deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@keyframes portalRingMiddle {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(-60deg);
+    }
+    50% {
+        transform: scale(1) rotate(-120deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(-360deg);
+    }
+}
+
+@keyframes portalRingInner {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(90deg);
+    }
+    50% {
+        transform: scale(1) rotate(180deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(720deg);
+    }
+}
+
+/* Portal Core */
+.tron-realm .portal-core {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--red-primary) 0%, var(--red-secondary) 50%, transparent 70%);
+    opacity: 0;
+    transform: scale(0);
+    animation: portalCore 3s ease-out 0.6s forwards;
+    box-shadow:
+        0 0 40px var(--red-primary),
+        0 0 80px var(--red-secondary),
+        0 0 120px var(--red-dark);
+}
+
+@keyframes portalCore {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+    70% {
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Portal Particles */
+.tron-realm .portal-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.tron-realm .portal-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--red-primary);
+    border-radius: 50%;
+    opacity: 0;
+    animation: portalParticle 2s ease-out forwards;
+}
+
+@keyframes portalParticle {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
+    }
+}
+
+/* Portal Expand Animation */
+.tron-realm .portal-overlay.expanding .portal-container {
+    animation: portalExpand 1.5s ease-in-out forwards;
+}
+
+@keyframes portalExpand {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(50);
+        opacity: 0;
+    }
+}
+
+/* ===========================
+   BACK BUTTON
+   =========================== */
+
+.tron-realm .back-button {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--red-primary);
+    background: transparent;
+    border: 2px solid var(--red-primary);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.tron-realm .back-button:hover {
+    background: var(--red-primary);
+    color: var(--cyber-dark);
+    box-shadow: var(--red-glow);
+}
+
+.tron-realm .back-arrow {
+    font-size: 1.2rem;
+}
+
+/* ===========================
+   REALM HERO SECTION
+   =========================== */
+
+.tron-realm .realm-hero-section {
+    position: relative;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at center, hsla(0, 86%, 50%, 0.05) 0%, transparent 50%),
+        var(--cyber-bg);
+}
+
+.tron-realm .realm-symbol {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.15;
+    filter: blur(2px);
+    z-index: 2;
+    color: var(--red-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tron-realm .realm-bg-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px var(--red-primary));
+}
+
+.tron-realm .realm-hero-content {
+    max-width: 900px;
+    position: relative;
+    z-index: 10;
+}
+
+.tron-realm .realm-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    margin-bottom: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    color: var(--red-primary);
+    border: 1px solid hsla(0, 86%, 60%, 0.3);
+    border-radius: 20px;
+    background: hsla(0, 86%, 60%, 0.05);
+}
+
+.tron-realm .badge-icon {
+    font-size: 1rem;
+}
+
+.tron-realm .realm-title {
+    margin-bottom: 30px;
+}
+
+.tron-realm .realm-title-line {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 6rem;
+    font-weight: 900;
+    letter-spacing: 0.3rem;
+    line-height: 1.1;
+    text-shadow: 0 0 40px hsla(0, 86%, 60%, 0.3);
+}
+
+.tron-realm .realm-blockchain-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 25px;
+    margin-bottom: 30px;
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+    color: var(--red-secondary);
+    border: 2px solid var(--red-secondary);
+    background: hsla(0, 86%, 60%, 0.1);
+}
+
+.tron-realm .chain-icon {
+    font-size: 1.5rem;
+}
+
+.tron-realm .realm-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 50px;
+    color: var(--muted-foreground);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tron-realm .realm-stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 60px;
+}
+
+.tron-realm .realm-stat {
+    text-align: center;
+}
+
+.tron-realm .realm-stat .stat-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.tron-realm .realm-stat .stat-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+}
+
+/* Red Scroll Button */
+.red-scroll .scroll-button-icon {
+    border-color: var(--red-primary);
+    background: hsla(0, 86%, 60%, 0.05);
+    box-shadow:
+        0 0 15px hsla(0, 86%, 60%, 0.3),
+        0 0 30px hsla(0, 86%, 60%, 0.2);
+}
+
+.red-scroll .scroll-button-icon::before {
+    border-color: var(--red-primary);
+    filter: drop-shadow(0 0 6px var(--red-primary));
+}
+
+.red-scroll .scroll-button-icon::after {
+    border-color: hsla(0, 86%, 60%, 0.3);
+}
+
+.red-scroll .scroll-button-text {
+    color: var(--red-primary);
+    text-shadow: 0 0 10px hsla(0, 86%, 60%, 0.5);
+}
+
+.red-scroll:hover .scroll-button-icon {
+    border-color: var(--red-secondary);
+    box-shadow:
+        0 0 20px var(--red-primary),
+        0 0 40px var(--red-primary);
+}
+
+.red-scroll:hover .scroll-button-text {
+    color: var(--red-secondary);
+}
+
+/* ===========================
+   POWERS SECTION
+   =========================== */
+
+.tron-realm .realm-powers-section {
+    background: linear-gradient(180deg, var(--cyber-dark) 0%, var(--cyber-bg) 50%, var(--cyber-dark) 100%);
+}
+
+.tron-realm .powers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 60px;
+}
+
+.tron-realm .power-card {
+    background: hsla(0, 50%, 10%, 0.6);
+    border: 1px solid hsla(0, 86%, 60%, 0.2);
+    border-radius: 4px;
+    padding: 35px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tron-realm .power-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--red-primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tron-realm .power-card:hover {
+    border-color: var(--red-primary);
+    box-shadow: var(--red-shadow);
+    transform: translateY(-5px);
+}
+
+.tron-realm .power-card:hover::before {
+    opacity: 1;
+}
+
+.tron-realm .power-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px var(--red-primary));
+}
+
+.tron-realm .power-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.15rem;
+    margin-bottom: 15px;
+    color: var(--red-primary);
+}
+
+.tron-realm .power-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+    margin-bottom: 20px;
+}
+
+.tron-realm .power-quote {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--red-secondary);
+    padding-top: 15px;
+    border-top: 1px solid hsla(0, 86%, 60%, 0.2);
+}
+
+/* ===========================
+   FAQ SECTION
+   =========================== */
+
+.tron-realm .realm-faq-section {
+    background: var(--cyber-bg);
+}
+
+.tron-realm .faq-container {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 60px;
+}
+
+.tron-realm .faq-item {
+    background: hsla(0, 50%, 10%, 0.6);
+    border: 1px solid hsla(0, 86%, 60%, 0.2);
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.tron-realm .faq-item:hover {
+    border-color: hsla(0, 86%, 60%, 0.4);
+}
+
+.tron-realm .faq-item.active {
+    border-color: var(--red-primary);
+    box-shadow: var(--red-shadow);
+}
+
+.tron-realm .faq-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.tron-realm .faq-header:hover {
+    background: hsla(0, 86%, 60%, 0.05);
+}
+
+.tron-realm .faq-question {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+}
+
+.tron-realm .faq-toggle {
+    font-size: 1.5rem;
+    color: var(--red-primary);
+    transition: transform 0.3s ease;
+}
+
+.tron-realm .faq-item.active .faq-toggle {
+    transform: rotate(45deg);
+}
+
+.tron-realm .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.tron-realm .faq-item.active .faq-content {
+    max-height: 500px;
+    padding: 0 25px 25px;
+}
+
+.tron-realm .faq-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--muted-foreground);
+}
+
+/* ===========================
+   QUIZ SECTION
+   =========================== */
+
+.tron-realm .realm-quiz-section {
+    background: linear-gradient(180deg, var(--cyber-dark) 0%, var(--cyber-bg) 50%, var(--cyber-dark) 100%);
+}
+
+.tron-realm .realm-quiz-container {
+    width: 100%;
+    max-width: 700px;
+    background: hsla(0, 50%, 10%, 0.8);
+    border: 1px solid hsla(0, 86%, 60%, 0.3);
+    border-radius: 4px;
+    padding: 40px;
+    margin-bottom: 60px;
+}
+
+.tron-realm .quiz-progress {
+    margin-bottom: 30px;
+}
+
+.tron-realm .quiz-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--muted);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.tron-realm .quiz-progress-fill {
+    height: 100%;
+    width: 20%;
+    background: linear-gradient(90deg, var(--red-dark), var(--red-primary));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px var(--red-primary);
+}
+
+.tron-realm .quiz-progress-text {
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    text-align: center;
+}
+
+.tron-realm .quiz-question-container {
+    min-height: 300px;
+}
+
+.tron-realm .realm-quiz-question {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--foreground);
+}
+
+.tron-realm .realm-quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.tron-realm .realm-quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 20px;
+    background: hsla(0, 30%, 15%, 0.5);
+    border: 1px solid hsla(0, 86%, 60%, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tron-realm .realm-quiz-option:hover {
+    background: hsla(0, 86%, 60%, 0.1);
+    border-color: var(--red-primary);
+}
+
+.tron-realm .realm-quiz-option.selected {
+    background: hsla(0, 86%, 60%, 0.15);
+    border-color: var(--red-primary);
+    box-shadow: var(--red-shadow);
+}
+
+.tron-realm .realm-quiz-option.correct {
+    background: hsla(120, 100%, 40%, 0.2);
+    border-color: hsl(120, 100%, 40%);
+}
+
+.tron-realm .realm-quiz-option.incorrect {
+    background: hsla(0, 100%, 50%, 0.2);
+    border-color: hsl(0, 100%, 50%);
+}
+
+.tron-realm .option-marker {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--red-primary);
+    border: 2px solid var(--red-primary);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.tron-realm .option-content {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.tron-realm .quiz-actions {
+    display: flex;
+    justify-content: center;
+}
+
+/* Quiz Result */
+.tron-realm .quiz-result {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.tron-realm .result-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.tron-realm .result-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--red-primary);
+}
+
+.tron-realm .result-message {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted-foreground);
+    margin-bottom: 30px;
+}
+
+/* ===========================
+   LEGENDS SECTION
+   =========================== */
+
+.tron-realm .realm-legends-section {
+    background: var(--cyber-bg);
+}
+
+.tron-realm .legends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 60px;
+}
+
+.tron-realm .legend-card {
+    background: hsla(0, 50%, 10%, 0.6);
+    border: 1px solid hsla(0, 86%, 60%, 0.2);
+    border-radius: 4px;
+    padding: 35px 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tron-realm .legend-card:hover {
+    border-color: var(--red-primary);
+    box-shadow: var(--red-shadow);
+    transform: translateY(-5px);
+}
+
+.tron-realm .legend-avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--red-dark), var(--red-primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px hsla(0, 86%, 60%, 0.3);
+}
+
+.tron-realm .legend-initial {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--cyber-dark);
+}
+
+.tron-realm .legend-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    margin-bottom: 8px;
+    color: var(--red-primary);
+}
+
+.tron-realm .legend-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    color: var(--red-secondary);
+    margin-bottom: 15px;
+}
+
+.tron-realm .legend-description {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+}
+
+/* ===========================
+   CALL TO ACTION
+   =========================== */
+
+.tron-realm .realm-cta {
+    text-align: center;
+    max-width: 600px;
+    padding: 50px;
+    background: hsla(0, 60%, 5%, 0.8);
+    border: 1px solid hsla(0, 86%, 60%, 0.3);
+    border-radius: 4px;
+}
+
+.tron-realm .cta-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--red-primary);
+    margin-bottom: 15px;
+    letter-spacing: 0.1rem;
+}
+
+.tron-realm .cta-text {
+    font-size: 1rem;
+    color: var(--muted-foreground);
+    margin-bottom: 30px;
+}
+
+/* Red Button */
+.btn-red {
+    display: inline-block;
+    padding: 15px 40px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.15rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--cyber-dark);
+    background: var(--red-primary);
+    border: 2px solid var(--red-primary);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-red:hover {
+    background: var(--red-secondary);
+    border-color: var(--red-secondary);
+    box-shadow: var(--red-glow);
+}
+
+/* ===========================
+   FOOTER MODIFICATIONS
+   =========================== */
+
+.tron-realm .realm-footer .footer-logo {
+    text-shadow: 0 0 20px hsla(0, 86%, 60%, 0.5);
+}
+
+.tron-realm .realm-footer .footer-link:hover {
+    color: var(--red-primary);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 1024px) {
+    .tron-realm .realm-title-line {
+        font-size: 4rem;
+    }
+
+    .tron-realm .back-button {
+        top: 20px;
+        left: 20px;
+        font-size: 0.65rem;
+        padding: 10px 18px;
+    }
+
+    .tron-realm .realm-stats {
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tron-realm .realm-title-line {
+        font-size: 2.8rem;
+    }
+
+    .tron-realm .realm-stats {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .tron-realm .powers-grid,
+    .tron-realm .legends-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tron-realm .realm-quiz-container {
+        padding: 25px;
+    }
+
+    .tron-realm .back-button span:not(.back-arrow) {
+        display: none;
+    }
+
+    .tron-realm .back-button {
+        padding: 12px;
+    }
+
+    .tron-realm .back-arrow {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tron-realm .realm-title-line {
+        font-size: 2rem;
+        letter-spacing: 0.1rem;
+    }
+
+    .tron-realm .realm-badge {
+        font-size: 0.65rem;
+    }
+
+    .tron-realm .realm-blockchain-badge {
+        font-size: 0.85rem;
+    }
+}

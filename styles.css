@@ -2424,6 +2424,7 @@ body {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    padding-bottom: 50px;
 }
 
 .realm-card-clickable:hover {
@@ -2472,5 +2473,240 @@ body {
 }
 
 .realm-logo.gold-glow {
+    width: 160px;
+    height: 160px;
+    margin-top: -40px;
+    margin-bottom: -25px;
     filter: drop-shadow(0 0 15px #FFD700);
+    animation: none;
+    transform: none;
+}
+
+.realm-logo.purple-glow {
+    width: 90px;
+    height: 90px;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 15px #8B7DFF);
+    animation: none;
+}
+
+.realm-logo.red-glow {
+    width: 90px;
+    height: 90px;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 15px #EF4444);
+    animation: none;
+}
+
+/* ===========================
+   PURPLE PORTAL ANIMATION
+   =========================== */
+
+.portal-overlay.purple-portal {
+    background: hsla(250, 60%, 5%, 0.98);
+}
+
+.portal-overlay.purple-portal .portal-ring-outer {
+    border-color: #5B21B6;
+    animation: portalRingOuterPurple 3s ease-out forwards;
+}
+
+.portal-overlay.purple-portal .portal-ring-middle {
+    border-color: #6366F1;
+    animation: portalRingMiddlePurple 3s ease-out 0.2s forwards;
+}
+
+.portal-overlay.purple-portal .portal-ring-inner {
+    border-color: #8B7DFF;
+    animation: portalRingInnerPurple 3s ease-out 0.4s forwards;
+}
+
+.portal-overlay.purple-portal .portal-core {
+    background: radial-gradient(circle, #8B7DFF 0%, #6366F1 50%, transparent 70%);
+    box-shadow:
+        0 0 40px #8B7DFF,
+        0 0 80px #6366F1,
+        0 0 120px #5B21B6;
+    animation: portalCorePurple 3s ease-out 0.6s forwards;
+}
+
+@keyframes portalRingOuterPurple {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(60deg);
+    }
+    50% {
+        transform: scale(1) rotate(120deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@keyframes portalRingMiddlePurple {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(-60deg);
+    }
+    50% {
+        transform: scale(1) rotate(-120deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(-360deg);
+    }
+}
+
+@keyframes portalRingInnerPurple {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(90deg);
+    }
+    50% {
+        transform: scale(1) rotate(180deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(720deg);
+    }
+}
+
+@keyframes portalCorePurple {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+    70% {
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===========================
+   PURPLE REALM CARD STYLING
+   =========================== */
+
+.purple-glow {
+    color: #8B7DFF !important;
+    filter: drop-shadow(0 0 10px #8B7DFF);
+    animation: purpleFloat 4s ease-in-out infinite;
+}
+
+@keyframes purpleFloat {
+    0%, 100% {
+        transform: translateY(0);
+        filter: drop-shadow(0 0 10px #8B7DFF);
+    }
+    50% {
+        transform: translateY(-5px);
+        filter: drop-shadow(0 0 20px #8B7DFF);
+    }
+}
+
+.purple-tag {
+    background: hsla(250, 100%, 74%, 0.1) !important;
+    border-color: hsla(250, 100%, 74%, 0.3) !important;
+    color: #8B7DFF !important;
+}
+
+.realm-card-ethereum:hover {
+    border-color: #8B7DFF !important;
+    box-shadow: 0 0 30px hsla(250, 100%, 74%, 0.4) !important;
+}
+
+.realm-card-ethereum::after {
+    background: linear-gradient(90deg, transparent, hsla(250, 100%, 74%, 0.1), transparent);
+}
+
+.purple-hint {
+    color: #8B7DFF !important;
+    text-shadow: 0 0 10px hsla(250, 100%, 74%, 0.5) !important;
+}
+
+/* ===========================
+   RED REALM CARD STYLING (TRON)
+   =========================== */
+
+.red-glow {
+    color: #EF4444 !important;
+    filter: drop-shadow(0 0 10px #EF4444);
+    animation: redFloat 4s ease-in-out infinite;
+}
+
+@keyframes redFloat {
+    0%, 100% {
+        transform: translateY(0);
+        filter: drop-shadow(0 0 10px #EF4444);
+    }
+    50% {
+        transform: translateY(-5px);
+        filter: drop-shadow(0 0 20px #EF4444) drop-shadow(0 0 40px #DC2626);
+    }
+}
+
+.red-tag {
+    background: hsla(0, 86%, 60%, 0.1) !important;
+    border-color: hsla(0, 86%, 60%, 0.3) !important;
+    color: #EF4444 !important;
+}
+
+.realm-card-tron:hover {
+    border-color: #EF4444;
+    box-shadow: 0 0 30px hsla(0, 86%, 60%, 0.3);
+}
+
+.realm-card-tron:hover::before {
+    background: linear-gradient(90deg, transparent, hsla(0, 86%, 60%, 0.1), transparent);
+}
+
+.red-hint {
+    color: #EF4444 !important;
+    text-shadow: 0 0 10px hsla(0, 86%, 60%, 0.5) !important;
+}
+
+/* Red Portal Animation */
+.portal-overlay.red-portal {
+    background: hsla(0, 60%, 5%, 0.98);
+}
+
+.portal-overlay.red-portal .portal-ring-outer {
+    border-color: #991B1B;
+}
+
+.portal-overlay.red-portal .portal-ring-middle {
+    border-color: #DC2626;
+}
+
+.portal-overlay.red-portal .portal-ring-inner {
+    border-color: #EF4444;
+}
+
+.portal-overlay.red-portal .portal-core {
+    background: radial-gradient(circle, #EF4444 0%, #DC2626 50%, transparent 70%);
+    box-shadow:
+        0 0 40px #EF4444,
+        0 0 80px #DC2626,
+        0 0 120px #991B1B;
 }

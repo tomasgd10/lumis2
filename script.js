@@ -779,14 +779,30 @@ document.addEventListener('DOMContentLoaded', () => {
 // REALM PORTAL TRANSITION
 // ===========================
 
-function enterRealm(realmName) {
+function enterRealm(realmName, portalColor = 'gold') {
     const overlay = document.getElementById('portalOverlay');
     const particlesContainer = document.getElementById('portalParticles');
 
     if (!overlay) return;
 
+    // Set portal color theme
+    overlay.classList.remove('purple-portal', 'red-portal');
+    if (portalColor === 'purple') {
+        overlay.classList.add('purple-portal');
+    } else if (portalColor === 'red') {
+        overlay.classList.add('red-portal');
+    }
+
     // Show portal overlay
     overlay.classList.add('active');
+
+    // Particle color based on portal type
+    const particleColors = {
+        'purple': '#8B7DFF',
+        'red': '#EF4444',
+        'gold': '#FFD700'
+    };
+    const particleColor = particleColors[portalColor] || '#FFD700';
 
     // Create particles
     function createParticles(count) {
@@ -806,6 +822,7 @@ function enterRealm(realmName) {
                 particle.style.top = '50%';
                 particle.style.animationDelay = `${Math.random() * 0.5}s`;
                 particle.style.animationDuration = `${1 + Math.random()}s`;
+                particle.style.background = particleColor;
 
                 particlesContainer.appendChild(particle);
 

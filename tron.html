@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grid - Tron Realm | LUMIS</title>
+    <meta name="description" content="Enter The Grid, the realm of speed and entertainment. Discover the power of Tron's high-throughput blockchain.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tron-realm.css">
+</head>
+<body class="tron-realm">
+    <!-- Portal Overlay (for entry animation) -->
+    <div class="portal-overlay" id="portalOverlay">
+        <div class="portal-container">
+            <div class="portal-ring portal-ring-outer"></div>
+            <div class="portal-ring portal-ring-middle"></div>
+            <div class="portal-ring portal-ring-inner"></div>
+            <div class="portal-core"></div>
+            <div class="portal-particles" id="portalParticles"></div>
+        </div>
+    </div>
+
+    <!-- Overlays -->
+    <div class="vignette"></div>
+
+    <!-- Corner Crosshairs -->
+    <div class="crosshair crosshair-tl"></div>
+    <div class="crosshair crosshair-tr"></div>
+    <div class="crosshair crosshair-bl"></div>
+    <div class="crosshair crosshair-br"></div>
+
+    <!-- Back Navigation -->
+    <a href="index.html" class="back-button">
+        <span class="back-arrow">&larr;</span>
+        <span>RETURN TO LUMISVERSE</span>
+    </a>
+
+    <!-- Main Container -->
+    <div class="container" id="scroll-container">
+
+        <!-- Hero Section -->
+        <section id="realm-hero" class="section realm-hero-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="realm-hero-content">
+                <div class="realm-badge">
+                    <span class="badge-icon">&#9670;</span>
+                    <span class="badge-text">THE REALM OF SPEED</span>
+                </div>
+
+                <h1 class="realm-title">
+                    <span class="realm-title-line">THE</span>
+                    <span class="realm-title-line red-text">GRID</span>
+                </h1>
+
+                <div class="realm-blockchain-badge">
+                    <span class="chain-icon">&#9016;</span>
+                    <span class="chain-name">TRON</span>
+                </div>
+
+                <p class="realm-description">
+                    Where speed meets entertainment. The <span class="red-text">Grid</span> pulses with
+                    <span class="red-text">2,000 transactions per second</span>, powering a decentralized
+                    entertainment ecosystem that never sleeps.
+                </p>
+
+                <div class="realm-stats">
+                    <div class="realm-stat">
+                        <div class="stat-value red-text">2017</div>
+                        <div class="stat-label">Genesis Year</div>
+                    </div>
+                    <div class="realm-stat">
+                        <div class="stat-value red-text">DPoS</div>
+                        <div class="stat-label">Consensus</div>
+                    </div>
+                    <div class="realm-stat">
+                        <div class="stat-value red-text">2000</div>
+                        <div class="stat-label">TPS Capacity</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button red-scroll" onclick="scrollToSection('realm-powers')">
+                <div class="scroll-button-icon">&#8595;</div>
+                <div class="scroll-button-text">Discover Powers</div>
+            </div>
+        </section>
+
+        <!-- Realm Powers Section -->
+        <section id="realm-powers" class="section realm-powers-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    POWERS OF THE <span class="red-text">GRID</span>
+                </h2>
+                <p class="section-subtitle terminal-text red-terminal">The sacred abilities that define the Realm of Speed</p>
+            </div>
+
+            <div class="powers-grid">
+                <div class="power-card">
+                    <div class="power-icon red-text">&#9830;</div>
+                    <h3 class="power-name">BLAZING SPEED</h3>
+                    <p class="power-description">
+                        2,000 transactions per second with 3-second block times.
+                        The Grid processes at lightning speed while others crawl.
+                    </p>
+                    <div class="power-quote">"Speed is the ultimate currency."</div>
+                </div>
+
+                <div class="power-card">
+                    <div class="power-icon red-text">&#9670;</div>
+                    <h3 class="power-name">ZERO FEES</h3>
+                    <p class="power-description">
+                        Free transactions through bandwidth and energy system.
+                        Send value across the world without losing a single coin.
+                    </p>
+                    <div class="power-quote">"True freedom costs nothing."</div>
+                </div>
+
+                <div class="power-card">
+                    <div class="power-icon red-text">&#9674;</div>
+                    <h3 class="power-name">ENTERTAINMENT HUB</h3>
+                    <p class="power-description">
+                        Built for content creators and digital entertainment.
+                        Gaming, streaming, and media without middlemen.
+                    </p>
+                    <div class="power-quote">"Where creators own their destiny."</div>
+                </div>
+
+                <div class="power-card">
+                    <div class="power-icon red-text">&#9679;</div>
+                    <h3 class="power-name">STABLECOIN GIANT</h3>
+                    <p class="power-description">
+                        The largest USDT network in existence. More stablecoins
+                        flow through The Grid than any other realm.
+                    </p>
+                    <div class="power-quote">"Stability at the speed of light."</div>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button red-scroll" onclick="scrollToSection('realm-faq')">
+                <div class="scroll-button-icon">&#8595;</div>
+                <div class="scroll-button-text">Common Questions</div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="realm-faq" class="section realm-faq-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    WISDOM OF THE <span class="red-text">GRID</span>
+                </h2>
+                <p class="section-subtitle terminal-text red-terminal">Seekers often ask these questions</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item" data-faq="1">
+                    <div class="faq-header" onclick="toggleFaq(1)">
+                        <span class="faq-question">What is Tron and what makes it unique?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-1">
+                        <p>Tron is a <span class="red-text">high-performance blockchain</span> designed for the entertainment industry.
+                        Founded by Justin Sun in 2017, it processes 2,000 transactions per second with near-zero fees.
+                        Tron focuses on decentralizing content—letting creators publish, store, and monetize their work
+                        without platforms taking massive cuts.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="2">
+                    <div class="faq-header" onclick="toggleFaq(2)">
+                        <span class="faq-question">How does Tron achieve such high speeds?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-2">
+                        <p>Tron uses <span class="red-text">Delegated Proof of Stake (DPoS)</span> consensus. Instead of thousands
+                        of miners competing, 27 elected Super Representatives validate transactions. This streamlined
+                        approach allows blocks every 3 seconds and massive throughput. TRX holders vote for
+                        Super Representatives, creating a democratic governance system.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="3">
+                    <div class="faq-header" onclick="toggleFaq(3)">
+                        <span class="faq-question">What are Bandwidth and Energy?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-3">
+                        <p><span class="red-text">Bandwidth</span> and <span class="red-text">Energy</span> are Tron's resource system
+                        that enables free transactions. Bandwidth covers basic transfers and is regenerated daily.
+                        Energy powers smart contract execution. By staking TRX, you earn these resources and can
+                        transact without paying fees—a unique model in blockchain.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="4">
+                    <div class="faq-header" onclick="toggleFaq(4)">
+                        <span class="faq-question">Why is Tron the biggest USDT network?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-4">
+                        <p>Tron's <span class="red-text">speed and low costs</span> made it the preferred network for USDT transfers.
+                        More USDT circulates on Tron than on Ethereum. Exchanges, businesses, and users choose
+                        Tron-based USDT (TRC-20) because transactions confirm in seconds and cost virtually nothing
+                        compared to other networks.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-faq="5">
+                    <div class="faq-header" onclick="toggleFaq(5)">
+                        <span class="faq-question">What is BitTorrent's connection to Tron?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-content" id="faq-content-5">
+                        <p>Tron <span class="red-text">acquired BitTorrent</span> in 2018, bringing the world's largest decentralized
+                        file-sharing protocol under its ecosystem. BitTorrent Token (BTT) incentivizes users to
+                        share bandwidth and storage. This merger combined Tron's blockchain with BitTorrent's
+                        massive user base of over 100 million monthly active users.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button red-scroll" onclick="scrollToSection('realm-quiz')">
+                <div class="scroll-button-icon">&#8595;</div>
+                <div class="scroll-button-text">Test Your Knowledge</div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="realm-quiz" class="section realm-quiz-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    TRIAL OF THE <span class="red-text">GRID</span>
+                </h2>
+                <p class="section-subtitle terminal-text red-terminal">Prove your understanding of the Realm of Speed</p>
+            </div>
+
+            <div class="realm-quiz-container">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                    </div>
+                    <div class="quiz-progress-text" id="quizProgressText">Question 1 of 5</div>
+                </div>
+
+                <div class="quiz-question-container" id="quizQuestionContainer">
+                    <!-- Questions will be loaded dynamically -->
+                </div>
+
+                <div class="quiz-result" id="quizResult" style="display: none;">
+                    <div class="result-icon" id="resultIcon"></div>
+                    <h3 class="result-title" id="resultTitle"></h3>
+                    <p class="result-message" id="resultMessage"></p>
+                    <button class="btn-red" onclick="restartQuiz()">TRY AGAIN</button>
+                </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button red-scroll" onclick="scrollToSection('realm-legends')">
+                <div class="scroll-button-icon">&#8595;</div>
+                <div class="scroll-button-text">Meet the Legends</div>
+            </div>
+        </section>
+
+        <!-- Legends Section -->
+        <section id="realm-legends" class="section realm-legends-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    LEGENDS OF THE <span class="red-text">GRID</span>
+                </h2>
+                <p class="section-subtitle terminal-text red-terminal">Notable projects built on Tron</p>
+            </div>
+
+            <div class="legends-grid">
+                <div class="legend-card">
+                    <div class="legend-avatar">
+                        <span class="legend-initial">S</span>
+                    </div>
+                    <h3 class="legend-name">SUNSWAP</h3>
+                    <div class="legend-title">The Exchange</div>
+                    <p class="legend-description">
+                        Tron's largest decentralized exchange. Swap tokens instantly
+                        with deep liquidity and minimal slippage.
+                    </p>
+                </div>
+
+                <div class="legend-card">
+                    <div class="legend-avatar">
+                        <span class="legend-initial">J</span>
+                    </div>
+                    <h3 class="legend-name">JUSTLEND</h3>
+                    <div class="legend-title">The Lender</div>
+                    <p class="legend-description">
+                        The official Tron lending protocol. Supply assets to earn yield
+                        or borrow against your crypto holdings.
+                    </p>
+                </div>
+
+                <div class="legend-card">
+                    <div class="legend-avatar">
+                        <span class="legend-initial">B</span>
+                    </div>
+                    <h3 class="legend-name">BITTORRENT</h3>
+                    <div class="legend-title">The Network</div>
+                    <p class="legend-description">
+                        The world's largest decentralized file-sharing protocol.
+                        Over 100 million users sharing content globally.
+                    </p>
+                </div>
+
+                <div class="legend-card">
+                    <div class="legend-avatar">
+                        <span class="legend-initial">U</span>
+                    </div>
+                    <h3 class="legend-name">USDD</h3>
+                    <div class="legend-title">The Stablecoin</div>
+                    <p class="legend-description">
+                        Tron's decentralized algorithmic stablecoin.
+                        Maintaining dollar parity through the TRON DAO Reserve.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="realm-cta">
+                <h3 class="cta-title">YOUR JOURNEY CONTINUES</h3>
+                <p class="cta-text">
+                    The Grid is but one realm. More await your discovery.
+                </p>
+                <a href="index.html#realms" class="btn-red">EXPLORE OTHER REALMS</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer realm-footer">
+            <div class="footer-content">
+                <div class="footer-logo red-text">LUMIS</div>
+                <div class="footer-tagline terminal-text red-terminal">
+                    "The Grid pulses. Speed is power. Enter the light."
+                </div>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="index.html#journey" class="footer-link">Journey</a>
+                    <a href="index.html#realms" class="footer-link">Realms</a>
+                    <a href="index.html#shadows" class="footer-link">Shadows</a>
+                    <a href="lumi-chat.html" class="footer-link">Lumi AI</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>The chains are calling. Your journey awaits. Step into the light.</p>
+                    <p class="terminal-text red-terminal">MIT License - The light belongs to everyone</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script src="tron-realm.js"></script>
+</body>
+</html>
