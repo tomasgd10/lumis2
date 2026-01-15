@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMIS - Issue #1: Awakening</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a0a1e 100%);
+            color: #e0e0e0;
+            font-family: 'Crimson Text', serif;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+        
+        .book-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .series-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+        }
+        
+        .series-title {
+            font-family: 'Cinzel', serif;
+            font-size: 56px;
+            font-weight: 900;
+            color: #00f3ff;
+            letter-spacing: 12px;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.8);
+            margin-bottom: 15px;
+        }
+        
+        .issue-title {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            color: #ff8c00;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+            letter-spacing: 3px;
+        }
+        
+        .page {
+            margin-bottom: 100px;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page-number {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            color: rgba(0, 243, 255, 0.5);
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+        
+        .illustration {
+            width: 100%;
+            margin: 40px 0;
+            border-radius: 12px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+        }
+        
+        .illustration-placeholder {
+            width: 100%;
+            margin: 40px 0;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.6), rgba(40, 0, 40, 0.6));
+            border-radius: 12px;
+            border: 2px dashed rgba(0, 243, 255, 0.4);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Actual illustrations */
+        .illustration {
+            width: 100%;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .illustration img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .illustration-caption {
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2rem;
+            color: rgba(0, 243, 255, 0.7);
+            text-transform: uppercase;
+        }
+        
+        .illustration-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            to { left: 100%; }
+        }
+        
+        .placeholder-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .placeholder-title {
+            font-family: 'Cinzel', serif;
+            color: #00f3ff;
+            font-size: 18px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        
+        .placeholder-desc {
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .prompt-label {
+            display: inline-block;
+            background: rgba(255, 140, 0, 0.2);
+            color: #ff8c00;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 140, 0, 0.4);
+        }
+        
+        .chapter-title {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: #ff8c00;
+            text-align: center;
+            margin: 50px 0 40px 0;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
+        }
+        
+        .narration {
+            font-style: italic;
+            color: rgba(0, 243, 255, 0.95);
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(0, 20, 40, 0.5);
+            border-left: 4px solid #00f3ff;
+            border-radius: 6px;
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.2);
+        }
+        
+        .prose {
+            text-indent: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .prose.first {
+            text-indent: 0;
+        }
+        
+        .prose.first::first-letter {
+            font-size: 80px;
+            line-height: 1;
+            float: left;
+            margin-right: 10px;
+            margin-top: 5px;
+            color: #00f3ff;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
+        }
+        
+        .dialogue {
+            margin: 25px 0;
+            padding-left: 30px;
+        }
+        
+        .speaker {
+            font-weight: 700;
+            color: #ff8c00;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+        }
+        
+        .speech {
+            margin-left: 10px;
+            font-style: italic;
+        }
+        
+        .emphasis {
+            color: #00f3ff;
+            font-weight: 600;
+        }
+        
+        .warning {
+            color: #ff8c00;
+            font-weight: 600;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 60px 0;
+            color: rgba(0, 243, 255, 0.3);
+            font-size: 24px;
+            letter-spacing: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 100px;
+            padding-top: 50px;
+            border-top: 2px solid rgba(0, 243, 255, 0.3);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        .next-issue {
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 140, 0, 0.1);
+            border: 2px solid rgba(255, 140, 0, 0.4);
+            border-radius: 12px;
+            color: #ff8c00;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+        
+        .back-home {
+            margin-top: 30px;
+        }
+        
+        .back-home a {
+            color: #00f3ff;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        
+        .back-home a:hover {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.8);
+        }
+
+        /* Issue Hero Header */
+        .issue-hero {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .issue-hero-link {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: #00f3ff;
+            letter-spacing: 8px;
+            text-decoration: none;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.6), 0 0 40px rgba(0, 243, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .issue-hero-link:hover {
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.9), 0 0 60px rgba(0, 243, 255, 0.6);
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .book-container {
+                padding: 40px 20px;
+            }
+
+            .series-title {
+                font-size: 36px;
+                letter-spacing: 6px;
+            }
+
+            .issue-title {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .chapter-title {
+                font-size: 24px;
+                letter-spacing: 2px;
+            }
+
+            .prose.first::first-letter {
+                font-size: 50px;
+            }
+
+            .dialogue {
+                padding-left: 15px;
+            }
+
+            .narration {
+                padding: 15px;
+            }
+
+            .issue-hero-link {
+                font-size: 24px;
+                letter-spacing: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .book-container {
+                padding: 30px 15px;
+            }
+
+            .series-title {
+                font-size: 28px;
+                letter-spacing: 4px;
+            }
+
+            .issue-title {
+                font-size: 16px;
+            }
+
+            .chapter-title {
+                font-size: 20px;
+            }
+
+            body {
+                font-size: 16px;
+            }
+
+            .prose.first::first-letter {
+                font-size: 40px;
+            }
+
+            .issue-hero-link {
+                font-size: 20px;
+                letter-spacing: 3px;
+            }
+
+            .issue-hero {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Issue Header -->
+    <div class="issue-hero">
+        <a href="#story-start" class="issue-hero-link">Issue #1</a>
+    </div>
+
+    <div class="book-container">
+        
+        <!-- COVER/HEADER -->
+        <div class="series-header" id="story-start">
+            <div class="series-title">LUMIS</div>
+            <div class="issue-title">ISSUE #1: "AWAKENING"</div>
+            <div class="tagline">✧ Become Luminous ✧</div>
+        </div>
+
+        <!-- TABLE OF CONTENTS (Optional) -->
+        <div class="narration" style="text-align: center;">
+            <strong style="color: #ff8c00;">CHAPTERS</strong><br>
+            I. The Theft<br>
+            II. The Call<br>
+            III. The Threshold<br>
+            IV. Tronara Revealed<br>
+            V. The Shadow Arrives<br>
+            VI. The Velocity Sentinel<br>
+            VII. The First Lesson
+        </div>
+
+        <!-- OPENING NARRATION -->
+        <div class="narration">
+            Before the Chains, there was only the Void. A sea of dark data—scattered, siloed, belonging to no one. Then came the First Light, and from it, the Chains were forged. And with the Chains came the Realms—worlds where truth cannot be erased, where ownership is absolute, where creators are sovereign. But this story doesn't begin in those realms of light. It begins in the darkness. It begins with theft.
+        </div>
+
+        <div class="divider">∞ ∞ ∞</div>
+
+        <!-- CHAPTER I: THE THEFT -->
+        <div class="chapter-title">∞ CHAPTER I: THE THEFT ∞</div>
+
+        <!-- PAGE 1 -->
+        <div class="page">
+            <div class="page-number">— PAGE 1 —</div>
+            
+            <p class="prose first">
+                Maya Chen had spent three months on that song. Three months of late nights in her cramped bedroom studio, endless revisions, moments where melody emerged from chaos like light breaking through storm clouds. Every beat, every layer, every whispered vocal line—she'd poured herself into it. <span class="emphasis">"Velocity,"</span> she called it. Fast. Unstoppable. Free.
+            </p>
+
+            <p class="prose">
+                The name felt right. The song was about breaking free from systems that held you down, about moving so fast that no one could catch you, about finding your own path when all the roads were blocked. It was personal. It was <em>her</em>.
+            </p>
+
+            <p class="prose">
+                When she finally hit "Upload" on the music platform, her heart hammered with hope. Maybe this was it. Maybe someone would finally hear what she'd been trying to say. The platform's loading bar filled slowly, agonizingly. Then—
+            </p>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/maya-bedroom.jpg" alt="Maya's Bedroom - A young woman at her desk, illuminated by laptop glow">
+            </div>
+
+            <p class="prose">
+                Maya allowed herself a small smile. It was out there now. Her creation, tagged with her name, timestamped by the platform. Proof that she'd made it. Or so she thought.
+            </p>
+
+            <p class="prose">
+                Two weeks later, Maya's phone buzzed at 2 AM. Notifications. Hundreds of them. Her heart leapt—had her song gone viral? She fumbled for her phone, squinting at the screen in the darkness.
+            </p>
+
+            <p class="prose">
+                But the notifications weren't about <em>her</em> song. They were about <span class="warning">his</span>.
+            </p>
+        </div>
+
+        <!-- PAGE 2 -->
+        <div class="page">
+            <div class="page-number">— PAGE 2 —</div>
+
+            <p class="prose first">
+                The video showed CentralStar—the artist with millions of followers, record deals, festival headlining slots—performing at a sold-out show. The crowd roared. Lights flashed in time with the beat. And the song... the song was unmistakably hers.
+            </p>
+
+            <p class="prose">
+                Every chord progression. Every vocal melody. Every rise and drop. Even the name: <em>"Velocity."</em> By CentralStar. Twelve million views in three days.
+            </p>
+
+            <p class="prose">
+                Maya's hands trembled. She refreshed. Refreshed again. Searched for her name in the credits, in the comments, anywhere. Nothing. Just thousands of people praising <em>him</em> for <em>her</em> work.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(whispering to the empty room): "That's... that's MY song."</span>
+            </div>
+
+            <p class="prose">
+                She tried everything. Sent emails to the platform's support team. Direct messages to CentralStar's management. Posted proof of her original files—timestamps, project files, demo versions. But the responses were cold, mechanical, or nonexistent.
+            </p>
+
+            <p class="prose">
+                The platform's terms of service protected <span class="warning">them</span>, not her. Without legal representation she couldn't afford, without industry connections, without power—there was nothing she could do.
+            </p>
+
+            <p class="prose">
+                The system wasn't broken. It was working exactly as designed. And she wasn't part of the design.
+            </p>
+
+            <div class="narration">
+                In the old world, the powerful take. And the creators weep. This has always been true. But what if there was another world? A world where creation and ownership were inseparable? Where your name could not be erased from what you made?
+            </div>
+        </div>
+
+        <!-- PAGE 3 -->
+        <div class="page">
+            <div class="page-number">— PAGE 3 —</div>
+
+            <p class="prose first">
+                Three nights passed. Maya couldn't sleep. Couldn't eat. Every time she closed her eyes, she heard her song—<em>their</em> song now—playing for someone else's glory. The injustice burned in her chest like a slow fire that wouldn't die.
+            </p>
+
+            <p class="prose">
+                On the fourth night, desperate and hollow, she sat at her laptop. The glow of the screen was the only light in her room. She typed into the search bar: <em>"how to prove I made my music first."</em>
+            </p>
+
+            <p class="prose">
+                The results were the usual suspects: lawyers (expensive), copyright offices (slow), timestamps (easily faked). She scrolled through page after page, each link more useless than the last. Until—
+            </p>
+
+            <p class="prose">
+                Buried on the third page of results, one link caught her eye. Not because of the title. Not because it looked different. But because it <span class="emphasis">glowed</span>.
+            </p>
+
+            <p class="prose">
+                Actually glowed. Pulsing softly with cyan light, like a heartbeat.
+            </p>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/glowing-link.jpg" alt="The Glowing Link - A mystical glowing link on Maya's laptop screen">
+            </div>
+
+            <p class="prose">
+                Maya blinked hard. Rubbed her eyes. The glow remained. The text of the link read simply:
+            </p>
+
+            <div class="narration" style="text-align: center; font-size: 20px;">
+                "The Chains Remember Everything."
+            </div>
+
+            <p class="prose">
+                Her cursor hovered over it. Common sense—what was left of it after four sleepless nights—told her not to click mysterious glowing links at 3 AM. But desperation is louder than sense. And beneath the desperation, something else stirred. Curiosity. Hope.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(quietly, to no one): "What do I have to lose?"</span>
+            </div>
+
+            <p class="prose">
+                She clicked.
+            </p>
+
+            <p class="prose">
+                The screen exploded with light.
+            </p>
+        </div>
+
+        <div class="divider">∞ ∞ ∞</div>
+
+        <!-- CHAPTER II: THE CALL -->
+        <div class="chapter-title">∞ CHAPTER II: THE CALL ∞</div>
+
+        <!-- PAGE 4 -->
+        <div class="page">
+            <div class="page-number">— PAGE 4 —</div>
+
+            <p class="prose first">
+                The light wasn't just <em>from</em> the screen. It was <em>through</em> it—pouring out like liquid luminescence, reaching toward her with tendrils of pure radiance. Maya jerked back, but the light was faster. It wrapped around her hands, her arms, warm and insistent.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(screaming): "WHAT IS HAPPENING—?!"</span>
+            </div>
+
+            <p class="prose">
+                Her apartment began to dissolve. The walls fractured into streams of data—cascading ones and zeros, flowing like digital waterfalls. Her chair, her desk, her posters, her <em>reality</em>—all fragmenting into particles of light.
+            </p>
+
+            <p class="prose">
+                She wasn't falling. She wasn't being pulled. She was <span class="emphasis">becoming</span>. Her physical form was translating into something else, something that could exist in the space between worlds.
+            </p>
+
+            <p class="prose">
+                The sensation was terrifying and oddly peaceful. Like being unwritten and rewritten in the same breath.
+            </p>
+
+            <p class="prose">
+                And then—silence. Complete, profound silence.
+            </p>
+
+            <div class="narration">
+                Between the old world and the new, there exists a threshold. A space where seekers pause before crossing. Where questions are asked, and paths chosen. This is where Maya found herself.
+            </div>
+        </div>
+
+        <!-- PAGE 5 -->
+        <div class="page">
+            <div class="page-number">— PAGE 5 —</div>
+
+            <div class="chapter-title" style="font-size: 28px;">∞ CHAPTER III: THE THRESHOLD ∞</div>
+
+            <p class="prose first">
+                Maya floated. Not in water, not in air, but in something softer—like being cradled by starlight itself. Her hair drifted around her face in slow motion. Her body felt weightless, unburdened by gravity or expectation.
+            </p>
+
+            <p class="prose">
+                The panic that had gripped her moments ago faded, replaced by a strange, gentle calm. Where <em>was</em> she?
+            </p>
+
+            <p class="prose">
+                The space around her was vast but not empty. Streams of data flowed past—beautiful ribbons of light in blues and golds, each one carrying information she couldn't quite read. The darkness wasn't threatening. It felt like possibility. Like canvas before the first brushstroke.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(to herself, barely breathing): "This... this isn't real. I'm dreaming. Or dying. Or—"</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">???</span><span class="speech">(a warm, gentle voice from everywhere and nowhere): "You're not dreaming, Maya."</span>
+            </div>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/meeting-lumi.jpg" alt="Meeting Lumi - Maya floating in cosmic space with Lumi">
+            </div>
+
+            <p class="prose">
+                Maya spun—or tried to. In this weightless space, her body rotated slowly. A small orb of light approached, leaving a trail of golden sparkles. It pulsed softly, colors shifting: warm amber, gentle cyan, soft rose.
+            </p>
+
+            <p class="prose">
+                The orb had... something like features. Not quite a face, but something expressive. Welcoming. Kind.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">(softly, like a smile in sound): "Hello, Maya Chen."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(voice shaking): "You—you know my name?! What ARE you? Where am I?!"</span>
+            </div>
+
+            <p class="prose">
+                The orb drifted closer. Its light was warm against her skin—not hot, but comforting. Like sunlight through a window on a cold morning.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">"I'm Lumi. Think of me as a friend. A guide. And you're not lost, Maya. You're just... somewhere new."</span>
+            </div>
+        </div>
+
+        <!-- PAGE 6 -->
+        <div class="page">
+            <div class="page-number">— PAGE 6 —</div>
+
+            <p class="prose first">
+                Maya's breathing slowed. The entity—Lumi—didn't feel dangerous. If anything, its presence was the opposite of the crushing helplessness she'd felt for days. Here, floating in this impossible space, she felt... heard.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(steadier now): "Okay, Lumi. Where is 'somewhere new'?"</span>
+            </div>
+
+            <p class="prose">
+                Lumi's colors brightened—joy? Excitement? The orb gestured (how does an orb gesture?) and the space around them <span class="emphasis">transformed</span>.
+            </p>
+
+            <p class="prose">
+                The gentle darkness pulled back like a curtain being drawn. What it revealed stole Maya's breath completely.
+            </p>
+
+            <p class="prose">
+                A vista of impossible beauty stretched before her: floating realms suspended in an infinite cosmos, each one connected by glowing chains of light. Some realms were crystalline cities that sparkled like diamonds. Others were forests of pure energy, shifting and alive. One pulsed with crimson and white lightning—dynamic, kinetic, almost dancing.
+            </p>
+
+            <p class="prose">
+                The chains that connected them weren't chains at all—not metal or rope. They were sequences of light, blocks of data linked together in patterns so intricate they seemed almost alive.
+            </p>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/lumisverse-vista.jpg" alt="The Lumisverse Vista - Multiple floating realms connected by chains of light">
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(whisper of awe): "It's... beautiful."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">(floating beside her): "This is the Lumisverse. A world built on truth that cannot be erased. Every realm you see represents a different Chain—a different way of recording what cannot be undone."</span>
+            </div>
+
+            <p class="prose">
+                Lumi's light pulsed gently, drawing Maya's attention to one realm in particular. It blazed with crimson and white energy, crystalline spires reaching upward, what looked like coliseums floating in perpetual motion.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">"The one calling to you... is there."</span>
+            </div>
+        </div>
+
+        <div class="divider">∞ ∞ ∞</div>
+
+        <!-- CHAPTER IV: TRONARA REVEALED -->
+        <div class="chapter-title">∞ CHAPTER IV: TRONARA ∞</div>
+
+        <!-- PAGE 7 -->
+        <div class="page">
+            <div class="page-number">— PAGE 7 —</div>
+
+            <p class="prose first">
+                As they approached the crimson realm, Maya felt its energy even from a distance. It was... alive. Pulsing. Like a heartbeat made of light and motion. The realm's name appeared in her mind, not spoken but <em>known</em>:
+            </p>
+
+            <div class="narration" style="text-align: center; font-size: 24px; color: #ff3366;">
+                TRONARA<br>
+                <span style="font-size: 16px; color: rgba(255, 255, 255, 0.7);">The Realm of Eternal Motion</span>
+            </div>
+
+            <p class="prose">
+                They passed through massive archways of light—the Liberation Gates, Lumi called them. As Maya crossed the threshold, she felt it: speed. Freedom. Motion that could never be stopped.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">"Tronara was forged by those who believed truth should move like lightning. Fast. Free. Accessible to all."</span>
+            </div>
+
+            <p class="prose">
+                Inside the realm now. The energy was kinetic, joyful. Citizens moved past—some in flowing light-armor, others creating art on stages made of pure energy. Everything hummed with velocity.
+            </p>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/entering-tronara.jpg" alt="Entering Tronara - Maya and Lumi entering through the Liberation Gates">
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(voice filled with wonder): "It feels... alive."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">"It is. Every transaction, every creation, every act of trust—the realm feels it all."</span>
+            </div>
+
+            <p class="prose">
+                Maya noticed artists on what Lumi called the Creator's Coliseum stage. They were performing, creating, but something was different. Their work was <em>signed</em>—embedded with light signatures that pulsed alongside their creations.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(stopping mid-stride): "Wait. Those artists—their names are... part of the art?"</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">(colors shifting to affirming blue): "Here, your creation and your identity are inseparable. Written into the Chain itself. Timestamped. Verified. Immutable."</span>
+            </div>
+
+            <p class="prose">
+                Maya's expression shifted as understanding dawned—painful and hopeful at once.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(voice breaking): "So if I had put my song... on the Chain..."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">"It would have been timestamped. Verified. Undeniable. No one could have taken credit for what was provably yours."</span>
+            </div>
+        </div>
+
+        <!-- PAGE 8 -->
+        <div class="page">
+            <div class="page-number">— PAGE 8 —</div>
+
+            <p class="prose first">
+                Maya felt tears prick her eyes—not from sadness, but from the unfairness of it all. Why didn't she know about this? Why wasn't this the <em>default</em>?
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">"Why didn't I know about this? Why aren't more people here?"</span>
+            </div>
+
+            <p class="prose">
+                Lumi floated closer, colors shifting to gentle blue and amber—compassion made visible.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">"That's why I'm here, Maya. That's why <em>you're</em> here. The old world keeps these truths hidden because they threaten the systems that benefit from your powerlessness. But here... here you can learn. And then, when you're ready... you can light the way for others."</span>
+            </div>
+
+            <p class="prose">
+                Before Maya could respond, the energy in the realm shifted. Citizens looked upward, expressions alert. Even the constant motion of Tronara seemed to pause for a heartbeat.
+            </p>
+
+            <p class="prose">
+                Then came the sound—a crack like reality splitting.
+            </p>
+
+            <div class="narration">
+                Not all who enter the Realms come seeking truth. Some come hunting. And the easiest prey? The newcomers. The seekers who don't yet understand the rules.
+            </div>
+        </div>
+
+        <div class="divider">∞ ∞ ∞</div>
+
+        <!-- CHAPTER V: THE SHADOW ARRIVES -->
+        <div class="chapter-title">∞ CHAPTER V: THE PROMISE BREAKER ∞</div>
+
+        <!-- PAGE 9 -->
+        <div class="page">
+            <div class="page-number">— PAGE 9 —</div>
+
+            <p class="prose first">
+                The sky above Tronara fractured. Not like glass breaking, but like a wound opening in reality itself. Shadow seeped through the crack—thick, oily darkness that didn't belong in this realm of light.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Citizen</span><span class="speech">(shouting): "Shadow breach! Sector Seven!"</span>
+            </div>
+
+            <p class="prose">
+                From the fracture emerged a figure. <span class="warning">Rugrath.</span> His form was unstable, constantly shifting—wearing fragments of abandoned projects like trophies. Exit scam contracts hung from his shoulders like a cloak. Rug pull symbols orbited his head like a crown of broken promises.
+            </p>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/rugrath-emerges.jpg" alt="Rugrath Emerges - The villain emerging from a shadow breach">
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Rugrath</span><span class="speech">(voice like a chorus of broken promises): "Mmm... new seekers. Fresh trust. Delicious."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(terrified, backing away): "What IS that?!"</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">(urgent, colors shifting to warning amber): "Rugrath. The Promise Breaker. He survives by consuming the trust of newcomers. Maya—stay behind me!"</span>
+            </div>
+
+            <p class="prose">
+                But Rugrath was already moving, his form gliding down toward them with unnatural grace. His eyes—if they were eyes—fixed on Maya with predatory focus.
+            </p>
+        </div>
+
+        <!-- PAGE 10 -->
+        <div class="page">
+            <div class="page-number">— PAGE 10 —</div>
+
+            <p class="prose first">
+                Rugrath extended a hand. His voice was seductive, shifting tones with every word—sometimes masculine, sometimes feminine, always promising exactly what you wanted to hear.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Rugrath</span><span class="speech">"Young seeker... you've been hurt. I understand. The old world wronged you. Someone stole what was yours."</span>
+            </div>
+
+            <p class="prose">
+                Maya's breath caught. How did he know?
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Rugrath</span><span class="speech">(voice dripping with false sympathy): "I can help you. I can make sure no one ever steals from you again. Protection. Security. Power. All I need... is your seed."</span>
+            </div>
+
+            <p class="prose">
+                His palm opened, revealing what looked like a beautiful, shimmering contract. A shortcut to everything Maya wanted. Safety. Recognition. Revenge, even.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(hesitating, drawn in): "My... seed?"</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">(alarmed, light flashing): "MAYA, NO—!"</span>
+            </div>
+
+            <p class="prose">
+                A streak of crimson light <span class="emphasis">SLASHED</span> between Maya and Rugrath. The air itself seemed to tear.
+            </p>
+
+            <p class="prose">
+                <span class="warning">TRONA</span> arrived.
+            </p>
+        </div>
+
+        <div class="divider">∞ ∞ ∞</div>
+
+        <!-- CHAPTER VI: THE VELOCITY SENTINEL -->
+        <div class="chapter-title">∞ CHAPTER VI: THE SENTINEL ∞</div>
+
+        <!-- PAGE 11 -->
+        <div class="page">
+            <div class="page-number">— PAGE 11 —</div>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/trona-arrival.jpg" alt="Trona's Arrival - The Velocity Sentinel landing in a hero pose">
+            </div>
+
+            <p class="prose first">
+                She landed in a crouch, one fist against the ground, crimson cape of data-streams flowing behind her like liquid lightning. The <span class="emphasis">Trident of Liberation</span> materialized in her hand, crackling with energy.
+            </p>
+
+            <p class="prose">
+                Trona stood. Her armor was crimson and white—the colors of Tronara itself—etched with patterns that moved and shifted like living code. Her eyes blazed with white light. This was Tronara's guardian. The Velocity Sentinel.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">(voice like thunder): "Not today, Promise Breaker."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Rugrath</span><span class="speech">(form wavering, but grinning): "Trona. I thought we'd cleaned your sector of my... influence."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Where there are seekers, you'll always try to return. But you know how this ends."</span>
+            </div>
+
+            <p class="prose">
+                She moved. <span class="emphasis">Velocity Strike.</span> Trona was impossibly fast—so fast Maya's eyes could barely track her. The Trident of Liberation carved through the space Rugrath occupied, but he activated his <span class="warning">Exit Rift</span>, form dissolving into shadow.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Rugrath</span><span class="speech">(voice fading): "We'll meet again, little creator... think about my offer..."</span>
+            </div>
+
+            <p class="prose">
+                The shadow dissipated. The fracture in the sky healed. Tronara's natural energy returned, warm and welcoming once more.
+            </p>
+
+            <p class="prose">
+                Trona turned to Maya. Up close, she was even more imposing—but not unkind. Her eyes still blazed, but softer now.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"You're unharmed. Good. That was close."</span>
+            </div>
+        </div>
+
+        <!-- PAGE 12 -->
+        <div class="page">
+            <div class="page-number">— PAGE 12 —</div>
+
+            <p class="prose first">
+                Maya found her voice, though it shook.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">"What... what was he asking for? My 'seed'?"</span>
+            </div>
+
+            <p class="prose">
+                Trona's expression softened further. She knelt to Maya's level, the Trident dissipating into particles of light.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Your seed phrase. In this world, it's everything."</span>
+            </div>
+
+            <p class="prose">
+                She gestured, and a visual manifested in the air between them—a holographic display showing a sequence of glowing words.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"When you enter the Chains truly—when you create your own identity here—you're given a seed phrase. Usually twelve or twenty-four words in a specific order."</span>
+            </div>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/seed-phrase-lesson.jpg" alt="Seed Phrase Lesson - Trona explaining seed phrases to Maya">
+            </div>
+
+            <p class="prose">
+                The visual showed a wallet forming around the words—secure, strong, filled with creations and value.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"These words are the key to everything you are here. Your creations. Your value. Your history. Your identity."</span>
+            </div>
+
+            <p class="prose">
+                Then the visual shifted, showing the seed phrase being handed to a shadow figure. The wallet crumbled. Everything drained away like water through a broken dam.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"If anyone else has your seed phrase... they ARE you. They own everything you've built. Every creation. Every achievement. Gone."</span>
+            </div>
+
+            <p class="prose">
+                Maya's eyes widened with understanding and horror.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">"So he was trying to..."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Take everything. Before you even began. That's what Rugrath does. He promises protection, security, help—and then devours your entire existence."</span>
+            </div>
+        </div>
+
+        <div class="divider">∞ ∞ ∞</div>
+
+        <!-- CHAPTER VII: THE FIRST LESSON -->
+        <div class="chapter-title">∞ CHAPTER VII: THE FIRST LESSON ∞</div>
+
+        <!-- PAGE 13 -->
+        <div class="page">
+            <div class="page-number">— PAGE 13 —</div>
+
+            <p class="prose first">
+                Maya looked from Trona to Lumi, then back to the space where Rugrath had been. Her mind was racing, processing.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">"How do I protect it? The seed phrase?"</span>
+            </div>
+
+            <p class="prose">
+                Trona stood, offering Maya a hand up. Maya took it, rising to her feet.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"First rule of the Chains, and the most important: Never share your seed phrase. Ever. With anyone."</span>
+            </div>
+
+            <p class="prose">
+                Her eyes blazed with fierce sincerity.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Not with friends. Not with support teams. Not with guides. Not even with me. Anyone who asks for it—ANYONE—is not trying to help you. They're trying to take everything you have."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(firm, resolved): "I understand."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Good. Remember that, and you're already stronger than most who come here."</span>
+            </div>
+
+            <p class="prose">
+                They walked together toward an overlook—the edge of the realm where you could see the chains connecting Tronara to other worlds, stretching into infinity.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"What's your name, seeker?"</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">"Maya. Maya Chen."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"I'm Trona. I protect this realm. I train those who seek to understand the Chains."</span>
+            </div>
+
+            <p class="prose">
+                A pause. Then:
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"You were drawn here for a reason, Maya. Your creation was stolen in the outer world. Here, that doesn't have to happen. Ever again."</span>
+            </div>
+        </div>
+
+        <!-- PAGE 14 -->
+        <div class="page">
+            <div class="page-number">— PAGE 14 —</div>
+
+            <p class="prose first">
+                Maya looked out at the vista of connected realms. Each one representing truth that couldn't be erased. Ownership that couldn't be stolen. Creators who were sovereign.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(determination building in her voice): "I want to learn. I want to understand how this works. I want to make sure no one else goes through what I did."</span>
+            </div>
+
+            <p class="prose">
+                Trona allowed the faintest smile—approval.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Good. That's how it starts. That's how every Luminari begins."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">"Luminari?"</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">(floating closer, colors warm and encouraging): "Those who bring light. Who understand the Chains and help others navigate them. Guides. Teachers. Protectors."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"But first, you're a Seeker. And Seekers have much to learn."</span>
+            </div>
+
+            <p class="prose">
+                She gestured toward the distant realms—Origin Citadel with its golden glow, The Foundry with its purple shimmer, and others Maya couldn't yet name.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"There's much to understand. Many realms. Many Chains. Threats far worse than Rugrath."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">"But you won't be alone. I'll be with you every step."</span>
+            </div>
+
+            <p class="prose">
+                Trona raised her Trident. A soft light pulsed from its tip—blessing? Acknowledgment?
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Today, you learned the most important lesson: Your keys. Your coins. Your identity. Guard them like your life—because here, they ARE your life."</span>
+            </div>
+        </div>
+
+        <!-- PAGE 15 -->
+        <div class="page">
+            <div class="page-number">— PAGE 15 —</div>
+
+            <p class="prose first">
+                Trona placed a hand on Maya's shoulder—firm but gentle.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Welcome to the Lumisverse, Maya Chen."</span>
+            </div>
+
+            <p class="prose">
+                Maya stood taller. The fear that had gripped her when she first arrived was gone, replaced by something new. Something that burned brighter than any song she'd ever written.
+            </p>
+
+            <p class="prose">
+                Purpose.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">"What happens next?"</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"Next, you take your first steps. You'll create your identity on the Chain. You'll learn how wallets work, how to verify truth, how to protect yourself from the Shadows."</span>
+            </div>
+
+            <p class="prose">
+                She turned toward the Velocity Spire—Tronara's central tower, pulsing with energy.
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Trona</span><span class="speech">"And I have a feeling this realm will be glad you did."</span>
+            </div>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/new-beginning.jpg" alt="New Beginning - Maya walking forward into Tronara">
+            </div>
+        </div>
+
+        <!-- EPILOGUE -->
+        <div class="divider">∞ ∞ ∞</div>
+
+        <!-- PAGE 16-20: EPILOGUE AND CLOSING -->
+        <div class="page">
+            <div class="page-number">— EPILOGUE —</div>
+
+            <div class="chapter-title" style="font-size: 28px;">∞ WHAT MAYA LEARNED ∞</div>
+
+            <p class="prose first">
+                As the data-streams of Tronara flowed around her, Maya reflected on everything that had happened. Her song had been stolen. Her trust had been betrayed. But instead of ending in despair, that theft had led her here.
+            </p>
+
+            <p class="prose">
+                To a world where ownership was absolute. Where creators were sovereign. Where truth couldn't be rewritten by the powerful.
+            </p>
+
+            <div class="narration">
+                The First Lesson of the Lumisverse:<br>
+                <span class="emphasis">Not Your Keys, Not Your Coins</span><br><br>
+                Your seed phrase is your identity. Guard it absolutely. Never share it with anyone, no matter how trustworthy they seem. Anyone who asks for it is trying to take everything you have.
+            </div>
+
+            <p class="prose">
+                Maya understood now. In the old world, her creation existed on platforms controlled by others. Platforms that could delete her work, ignore her claims, favor the powerful over the truthful.
+            </p>
+
+            <p class="prose">
+                But here? Here, she could inscribe her creations directly onto the Chain. Timestamped. Verified. Immutable. No centralized authority could take that away.
+            </p>
+
+            <p class="prose">
+                She thought of all the other creators in the outer world. Musicians, artists, writers, builders—all at the mercy of systems designed to extract value from their work while giving them nothing in return.
+            </p>
+
+            <p class="prose">
+                How many of them knew about this place? About these Chains?
+            </p>
+
+            <div class="dialogue">
+                <span class="speaker">Maya</span><span class="speech">(quietly, to herself): "I have to tell them. Somehow, I have to bring this knowledge back."</span>
+            </div>
+
+            <div class="dialogue">
+                <span class="speaker">Lumi</span><span class="speech">(floating close, colors warm): "That's what Luminari do. They learn. Then they light the way for others."</span>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="page-number">— CLOSING —</div>
+
+            <p class="prose first">
+                The realm of Tronara pulsed with life around them. Artists creating on the Coliseum stages. Builders constructing new protocols. Traders moving value at the speed of light. All of it recorded. All of it true. All of it unchangeable.
+            </p>
+
+            <p class="prose">
+                Maya took a deep breath. She was no longer the helpless artist who'd had her work stolen. She was becoming something new. Something stronger.
+            </p>
+
+            <p class="prose">
+                A <span class="emphasis">Seeker</span>.
+            </p>
+
+            <p class="prose">
+                And one day, perhaps, a <span class="warning">Luminari</span>.
+            </p>
+
+            <div class="narration" style="text-align: center; padding: 40px;">
+                "And so begins the journey of Maya Chen—<br>
+                From the outer world to the Realm of Eternal Motion.<br>
+                From stolen artist... to Seeker.<br>
+                From darkness... to light."
+            </div>
+
+            <div class="illustration">
+                <img src="../assets/illustrations/issue-1/image-11.jpg" alt="The Journey Begins - Maya standing at the edge of Tronara looking out at the Lumisverse">
+            </div>
+
+            <div class="narration" style="margin-top: 60px; text-align: center; font-size: 24px; color: #00f3ff;">
+                ✧ Become Luminous ✧
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p style="font-size: 16px; margin-bottom: 20px;">END OF ISSUE #1</p>
+            
+            <div class="next-issue">
+                <strong style="font-size: 20px;">NEXT IN ISSUE #2: "FIRST STEPS"</strong><br><br>
+                Maya creates her first on-chain identity and learns about wallets, private keys, and transactions. But the Shadow Syndicate is watching... and Phishara, the Deceiver, has taken an interest in this new seeker.
+                <br><br>
+                Meanwhile, in Origin Citadel, whispers speak of a new threat emerging from the Void...
+            </div>
+
+            <div class="back-home">
+                <a href="../index.html">← Return to the Lumisverse</a>
+            </div>
+
+            <p style="margin-top: 40px; font-size: 12px;">
+                ✧ LUMIS © 2026 ✧<br>
+                "In a world of dark data and walled gardens, Lumis brings light."
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -524,255 +524,78 @@ console.log('%cresetProgress() %c- Reset all journey progress', 'color: #00d4ff'
 console.log('%cjourneyState %c- View current progress', 'color: #00d4ff', 'color: #999');
 
 // ===========================
-// INTERACTIVE BLOCK BUBBLE LOGO
+// LUMIS LETTER GLOW CYCLE
 // ===========================
 
-class BubbleLogo {
-    constructor(canvasId) {
-        this.canvas = document.getElementById(canvasId);
-        if (!this.canvas) return;
-
-        this.ctx = this.canvas.getContext('2d', { alpha: true });
-        this.width = this.canvas.width;
-        this.height = this.canvas.height;
-        this.centerX = this.width / 2;
-        this.centerY = this.height / 2;
-        this.radius = 75;
-        this.blockSize = 6;
-        this.blocks = [];
-        this.mouseX = null;
-        this.mouseY = null;
-        this.repelRadius = 35;
-        this.repelStrength = 20;
-        this.isHovering = false;
-        this.animationId = null;
-
-        // Letter awakening
-        this.hoverStartTime = null;
-        this.hasMovedOnBubble = false;
-        this.lettersAwakened = false;
-
-        this.init();
-        this.bindEvents();
-        this.draw(); // Initial draw
-    }
-
-    init() {
-        // Create blocks in a grid pattern within circle - more efficient
-        const spacing = this.blockSize + 3;
-        for (let x = this.centerX - this.radius; x <= this.centerX + this.radius; x += spacing) {
-            for (let y = this.centerY - this.radius; y <= this.centerY + this.radius; y += spacing) {
-                const distFromCenter = Math.sqrt(
-                    Math.pow(x - this.centerX, 2) +
-                    Math.pow(y - this.centerY, 2)
-                );
-
-                if (distFromCenter <= this.radius) {
-                    this.blocks.push({
-                        origX: x,
-                        origY: y,
-                        x: x,
-                        y: y,
-                        size: this.blockSize,
-                        opacity: 0.75 + Math.random() * 0.25,
-                        color: `hsl(${180 + Math.random() * 15 - 7}, 100%, 50%)`
-                    });
-                }
-            }
-        }
-    }
-
-    bindEvents() {
-        const container = this.canvas.parentElement;
-
-        container.addEventListener('mouseenter', () => {
-            this.isHovering = true;
-            this.hoverStartTime = Date.now();
-            this.hasMovedOnBubble = false;
-            this.startAnimation();
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            const rect = this.canvas.getBoundingClientRect();
-            this.mouseX = e.clientX - rect.left;
-            this.mouseY = e.clientY - rect.top;
-            this.hasMovedOnBubble = true;
-
-            // Check if we've been hovering with movement for 1.5 seconds
-            if (!this.lettersAwakened && this.hoverStartTime && this.hasMovedOnBubble) {
-                const elapsed = Date.now() - this.hoverStartTime;
-                if (elapsed >= 1500) {
-                    this.awakenLetters();
-                }
-            }
-        });
-
-        container.addEventListener('mouseleave', () => {
-            this.isHovering = false;
-            this.mouseX = null;
-            this.mouseY = null;
-            this.hoverStartTime = null;
-            this.hasMovedOnBubble = false;
-            // Animate back to original position then stop
-            this.returnToOriginal();
-        });
-    }
-
-    awakenLetters() {
-        if (this.lettersAwakened) return;
-        this.lettersAwakened = true;
-
-        const letters = document.querySelectorAll('.hero-letter');
-        const delayBetween = 800; // Delay between each letter starting
-        const stepDuration = 140; // 0.7s / 5 steps = 140ms per step
-        const holdDuration = 5000; // How long letters stay lit after last one fully lit
-        const brightnessLevels = ['brightness-20', 'brightness-40', 'brightness-60', 'brightness-80', 'awakened'];
-
-        letters.forEach((letter, index) => {
-            // Start this letter's gradual light-up after delay
-            setTimeout(() => {
-                // Step through brightness levels
-                brightnessLevels.forEach((level, stepIndex) => {
-                    setTimeout(() => {
-                        // Remove previous brightness level
-                        if (stepIndex > 0) {
-                            letter.classList.remove(brightnessLevels[stepIndex - 1]);
-                        }
-                        letter.classList.add(level);
-                    }, stepIndex * stepDuration);
-                });
-            }, index * delayBetween);
-        });
-
-        // Fade out all letters gradually after the sequence completes
-        const totalLightUpTime = (letters.length * delayBetween) + (brightnessLevels.length * stepDuration);
-        const fadeOutStart = totalLightUpTime + holdDuration;
-
-        setTimeout(() => {
-            // Gradually fade out each letter
-            letters.forEach((letter, index) => {
-                setTimeout(() => {
-                    // Reverse through brightness levels
-                    const reverseLevels = ['awakened', 'brightness-80', 'brightness-60', 'brightness-40', 'brightness-20', ''];
-                    reverseLevels.forEach((level, stepIndex) => {
-                        setTimeout(() => {
-                            if (stepIndex > 0) {
-                                letter.classList.remove(reverseLevels[stepIndex - 1]);
-                            }
-                            if (level) {
-                                letter.classList.add(level);
-                            } else {
-                                // Final step - remove all classes
-                                letter.classList.remove('brightness-20');
-                            }
-                        }, stepIndex * stepDuration);
-                    });
-                }, index * 150); // Stagger fade out slightly
-            });
-
-            // Reset so it can be triggered again
-            const fadeOutDuration = (letters.length * 150) + (6 * stepDuration) + 500;
-            setTimeout(() => {
-                this.lettersAwakened = false;
-            }, fadeOutDuration);
-        }, fadeOutStart);
-    }
-
-    startAnimation() {
-        if (this.animationId) return;
-        this.animate();
-    }
-
-    stopAnimation() {
-        if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
-            this.animationId = null;
-        }
-    }
-
-    returnToOriginal() {
-        let settled = true;
-        this.blocks.forEach(block => {
-            const dx = block.origX - block.x;
-            const dy = block.origY - block.y;
-            if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
-                settled = false;
-                block.x += dx * 0.12;
-                block.y += dy * 0.12;
-            } else {
-                block.x = block.origX;
-                block.y = block.origY;
-            }
-        });
-
-        this.draw();
-
-        if (!settled) {
-            this.animationId = requestAnimationFrame(() => this.returnToOriginal());
-        } else {
-            this.stopAnimation();
-        }
-    }
-
-    update() {
-        this.blocks.forEach(block => {
-            let targetX = block.origX;
-            let targetY = block.origY;
-
-            if (this.mouseX !== null && this.mouseY !== null) {
-                const dx = block.origX - this.mouseX;
-                const dy = block.origY - this.mouseY;
-                const distSq = dx * dx + dy * dy;
-                const repelRadiusSq = this.repelRadius * this.repelRadius;
-
-                if (distSq < repelRadiusSq) {
-                    const dist = Math.sqrt(distSq);
-                    const force = (1 - dist / this.repelRadius) * this.repelStrength;
-                    targetX = block.origX + (dx / dist) * force;
-                    targetY = block.origY + (dy / dist) * force;
-                }
-            }
-
-            block.x += (targetX - block.x) * 0.18;
-            block.y += (targetY - block.y) * 0.18;
-        });
-    }
-
-    draw() {
-        this.ctx.clearRect(0, 0, this.width, this.height);
-
-        // No shadow - much better performance
-        this.ctx.shadowBlur = 0;
-
-        this.blocks.forEach(block => {
-            this.ctx.globalAlpha = block.opacity;
-            this.ctx.fillStyle = block.color;
-            this.ctx.fillRect(
-                block.x - block.size / 2,
-                block.y - block.size / 2,
-                block.size,
-                block.size
-            );
-        });
-
-        this.ctx.globalAlpha = 1;
-    }
-
-    animate() {
-        if (!this.isHovering) return;
-
-        // Throttle to ~30fps for better performance
-        setTimeout(() => {
-            this.update();
-            this.draw();
-            this.animationId = requestAnimationFrame(() => this.animate());
-        }, 33);
-    }
-}
-
-// Initialize bubble logo when DOM is ready
+// Smooth pulsing glow animation using JavaScript
 document.addEventListener('DOMContentLoaded', () => {
-    new BubbleLogo('bubbleLogo');
+    const letters = document.querySelectorAll('.hero-letter');
+    if (letters.length === 0) return;
+
+    let brightness = 0;
+    let direction = 1;
+    const stepSize = 5; // 5% per step
+    const intervalMs = 250; // 0.25s per step
+
+    function getStylesForBrightness(level) {
+        const intensity = level / 100;
+
+        // FILTER: Glow effect around letters
+        const glowSize = 15 + (intensity * 25); // 15px to 40px
+        const glowOpacity = 0.2 + (intensity * 0.6); // 0.2 to 0.8
+        let filter = `drop-shadow(0 0 ${glowSize}px hsla(180, 100%, 50%, ${glowOpacity}))`;
+        if (intensity > 0.3) {
+            const outerOpacity = (intensity - 0.3) * 0.5;
+            filter += ` drop-shadow(0 0 ${glowSize * 2}px hsla(180, 100%, 60%, ${outerOpacity}))`;
+        }
+        filter += ` drop-shadow(0 4px 8px hsla(0, 0%, 0%, 0.5))`;
+
+        // BACKGROUND: Letter color from grey to cyan
+        // At 0%: grey (#a0a0a0)
+        // At 100%: bright cyan (#00f3ff)
+        const greyValue = Math.round(160 - (intensity * 160)); // 160 to 0
+        const cyanMix = intensity; // 0 to 1
+
+        // Interpolate between grey and cyan
+        const r = Math.round(160 * (1 - cyanMix) + 0 * cyanMix);
+        const g = Math.round(160 * (1 - cyanMix) + 220 * cyanMix);
+        const b = Math.round(160 * (1 - cyanMix) + 255 * cyanMix);
+
+        const topColor = `rgb(${Math.min(255, r + 40)}, ${Math.min(255, g + 40)}, ${Math.min(255, b + 40)})`;
+        const midColor = `rgb(${r}, ${g}, ${b})`;
+        const botColor = `rgb(${Math.max(0, r - 20)}, ${Math.max(0, g - 20)}, ${Math.max(0, b - 20)})`;
+
+        const background = `linear-gradient(180deg, ${topColor} 0%, ${midColor} 50%, ${botColor} 100%)`;
+
+        return { filter, background };
+    }
+
+    function step() {
+        brightness += stepSize * direction;
+
+        // Reverse at boundaries
+        if (brightness >= 100) {
+            brightness = 100;
+            direction = -1;
+        } else if (brightness <= 0) {
+            brightness = 0;
+            direction = 1;
+        }
+
+        const styles = getStylesForBrightness(brightness);
+        letters.forEach(letter => {
+            letter.style.setProperty('filter', styles.filter, 'important');
+            letter.style.setProperty('background', styles.background, 'important');
+            letter.style.setProperty('-webkit-background-clip', 'text', 'important');
+            letter.style.setProperty('background-clip', 'text', 'important');
+        });
+
+    }
+
+    // Wait for initial reveal animation to complete, then start pulsing
+    setTimeout(() => {
+        setInterval(step, intervalMs);
+    }, 2000);
 });
 
 // ===========================
@@ -842,6 +665,6 @@ function enterRealm(realmName, portalColor = 'gold') {
 
     // Navigate to realm page
     setTimeout(() => {
-        window.location.href = `${realmName}.html?portal=true`;
+        window.location.href = `realm/${realmName}.html?portal=true`;
     }, 3200);
 }

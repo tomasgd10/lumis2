@@ -7,7 +7,13 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Shadow Syndicate Defender game\n\nStyled interactive quiz game teaching blockchain security concepts,\nmatching Lumis2 cyberpunk aesthetic with cyan/orange colors, scanlines,\nand Orbitron/Cinzel fonts.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git push)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(copy:*)",
+      "Bash(cmd /c copy \"c:\\\\Users\\\\Laurynas\\\\Downloads\\\\Cryptocurrency-Tron-Logo-Graphics-13510761-1.jpg\" \"C:\\\\Users\\\\Laurynas\\\\Desktop\\\\Antigravity\\\\lumis2\\\\tron-logo.jpg\")",
+      "Bash(cmd /c dir \"C:\\\\Users\\\\Laurynas\\\\Desktop\\\\Antigravity\\\\lumis2\\\\tron-logo.jpg\")",
+      "Bash(start \"\" \"C:\\\\Users\\\\Laurynas\\\\Desktop\\\\Antigravity\\\\lumis2\\\\index.html\")",
+      "Bash(ls:*)",
+      "Bash(start \"\" \"C:\\\\Users\\\\Laurynas\\\\Desktop\\\\Antigravity\\\\lumis2\\\\story\\\\issue-1.html\")"
     ]
   }
 }

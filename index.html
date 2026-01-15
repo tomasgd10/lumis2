@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Issue Link at Top -->
+    <a href="story/issue-1.html" class="issue-link">Issue #1</a>
+
     <!-- Overlays -->
     <div class="vignette"></div>
 
@@ -50,6 +53,7 @@
     <nav class="sidebar-nav">
         <a href="#hero" class="sidebar-link active" data-section="hero">HOME</a>
         <a href="#journey" class="sidebar-link" data-section="journey">JOURNEY</a>
+        <a href="#story" class="sidebar-link" data-section="story">STORY</a>
         <a href="#realms" class="sidebar-link" data-section="realms">REALMS</a>
         <a href="#shadows" class="sidebar-link" data-section="shadows">SHADOWS</a>
         <a href="#lumi" class="sidebar-link" data-section="lumi">LUMI AI</a>
@@ -83,11 +87,6 @@
                 <h1 class="hero-title-main">
                     <span class="hero-letter" style="animation-delay: 0.1s;">L</span><span class="hero-letter" style="animation-delay: 0.2s;">U</span><span class="hero-letter" style="animation-delay: 0.3s;">M</span><span class="hero-letter" style="animation-delay: 0.4s;">I</span><span class="hero-letter" style="animation-delay: 0.5s;">S</span>
                 </h1>
-
-                <!-- Interactive Block Bubble Logo -->
-                <div class="bubble-logo-container">
-                    <canvas id="bubbleLogo" width="200" height="200"></canvas>
-                </div>
 
                 <div class="hero-tagline">
                     <span class="tagline-line"></span>
@@ -441,6 +440,37 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Scroll Button -->
+            <div class="scroll-button" onclick="scrollToSection('story')" style="position: absolute; bottom: 40px;">
+                <div class="scroll-button-icon">↓</div>
+                <div class="scroll-button-text">Read The Story</div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section id="story" class="section story-section">
+            <!-- Section Vignette -->
+            <div class="section-vignette"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">
+                    THE <span class="orange-text">CHRONICLES</span>
+                </h2>
+                <p class="section-subtitle terminal-text">The light novel of the Lumisverse</p>
+            </div>
+
+            <div class="story-container">
+                <a href="story/issue-1.html" class="story-card">
+                    <div class="story-issue-number">ISSUE #1</div>
+                    <h3 class="story-title">THE AWAKENING</h3>
+                    <p class="story-description">
+                        The journey begins. A seeker discovers the path to enlightenment
+                        in a world of chains and light.
+                    </p>
+                    <div class="story-cta">READ NOW</div>
+                </a>
             </div>
 
             <!-- Scroll Button -->
